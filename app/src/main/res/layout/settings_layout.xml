@@ -29,18 +29,21 @@
         android:id="@+id/exloreButton"
         android:layout_width="145dp"
         android:layout_height="80dp"
+        android:layout_marginTop="754dp"
         android:backgroundTint="#8B0000"
         android:text="Explore"
         android:textColor="@color/black"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/settingsButton" />
+
+        app:layout_constraintEnd_toStartOf="@+id/settingsButton"
+        app:layout_constraintStart_toEndOf="@+id/homeButton"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
     <Button
         android:id="@+id/homeButton"
         android:layout_width="145dp"
         android:layout_height="80dp"
-        android:text="Home"
         android:backgroundTint="#8B0000"
+        android:text="Home"
         android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/exloreButton"
@@ -50,10 +53,11 @@
         android:id="@+id/settingsButton"
         android:layout_width="145dp"
         android:layout_height="80dp"
-        android:text="Settings"
         android:backgroundTint="#8B0000"
+        android:text="Settings"
         android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/exloreButton" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
