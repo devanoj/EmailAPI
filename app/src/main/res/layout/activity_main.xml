@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#891536"
+    tools:context="Main.SecondActivity">
+
+
+
+    <Button
+        android:id="@+id/exloreButton"
+        android:layout_width="145dp"
+        android:layout_height="80dp"
+        android:backgroundTint="#8B0000"
+        android:text="Explore"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/settingsButton" />
+
+    <Button
+        android:id="@+id/homeButton"
+        android:layout_width="145dp"
+        android:layout_height="80dp"
+        android:backgroundTint="#8B0000"
+        android:text="Home"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/exloreButton"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/settingsButton"
+        android:layout_width="145dp"
+        android:layout_height="80dp"
+        android:backgroundTint="#8B0000"
+        android:text="Settings"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="324dp"
+        android:text="Welcome"
+        android:textSize="50px"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="100dp"
+        android:text="Devano"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/SignOut"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="288dp"
+        android:layout_marginBottom="80dp"
+        android:text="Sign Out"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/addInfoButton"
+        android:layout_width="420dp"
+        android:layout_height="48dp"
+        android:layout_marginBottom="750dp"
+        android:backgroundTint="#c44a1e"
+        android:text="Update Information on User"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/deleteUser"
+        android:layout_width="410dp"
+        android:layout_height="48dp"
+        android:layout_marginBottom="715dp"
+        android:text="Delete User"
+        android:backgroundTint="#c44a1e"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/Search"
+        android:layout_width="410dp"
+        android:layout_height="48dp"
+        android:layout_marginBottom="679dp"
+        android:text="Search Animal"
+        android:backgroundTint="#c44a1e"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+
+
+    <EditText
+        android:id="@+id/NameEdit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="184dp"
+        android:layout_marginBottom="620dp"
+        android:ems="10"
+        android:hint="Name"
+        android:inputType="textPersonName"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <EditText
+        android:id="@+id/AgeEdit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="0dp"
+        android:ems="10"
+        android:hint="Age"
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
+        android:visibility="invisible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/NameEdit" />
+
+    <EditText
+        android:id="@+id/lifestyleEdit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="17dp"
+        android:layout_marginTop="0dp"
+        android:ems="10"
+        android:hint="lifestyle"
+        android:inputType="textPersonName"
+        android:visibility="invisible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/AgeEdit" />
+
+    <EditText
+        android:id="@+id/freeTimeEdit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="17dp"
+        android:layout_marginTop="0dp"
+        android:ems="10"
+        android:hint="freeTime"
+        android:inputType="textPersonName"
+        android:visibility="invisible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lifestyleEdit" />
+
+    <Button
+        android:id="@+id/submitButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="24dp"
+        android:text="Submit"
+        android:visibility="invisible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/freeTimeEdit" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

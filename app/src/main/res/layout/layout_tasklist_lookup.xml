@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardElevation="8dp"
+    app:cardCornerRadius="8dp"
+    android:layout_margin="16dp">
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Age: "
+                android:textColor="@color/black"
+                android:textSize="10sp"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/categoryEditTV1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Eating: "
+                android:layout_marginLeft="8dp"
+                android:textColor="@color/black"
+                android:textSize="10sp"
+                android:textStyle="bold"/>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Breed: "
+                android:textColor="@color/black"
+                android:textSize="10sp"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/descEditTV1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Error: "
+                android:layout_marginLeft="8dp"
+                android:textColor="@color/black"
+                android:textSize="10sp"
+                android:textStyle="bold"/>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Energy Level: "
+                android:textColor="@color/black"
+                android:textSize="10sp"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/deadlineEditTV1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Yesterday: "
+                android:layout_marginLeft="8dp"
+                android:textColor="@color/black"
+                android:textSize="10sp"
+                android:textStyle="bold"/>
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Name: "
+                android:textColor="@color/black"
+                android:textSize="10sp"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/statusEditTV1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Hungry "
+                android:layout_marginLeft="8dp"
+                android:textColor="@color/black"
+                android:textSize="10sp"
+                android:textStyle="bold"/>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ID: "
+                android:textColor="@color/black"
+                android:textSize="10sp"
+                android:textStyle="bold"
+                android:visibility="invisible"/>
+
+            <TextView
+                android:id="@+id/idAnimal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Hungry "
+                android:layout_marginLeft="8dp"
+                android:textColor="@color/black"
+                android:textSize="10sp"
+                android:textStyle="bold"
+                android:visibility="invisible"/>
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ID: "
+                android:textColor="@color/black"
+                android:textSize="10sp"
+                android:textStyle="bold"
+                android:visibility="invisible"/>
+
+            <TextView
+                android:id="@+id/idUser"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Hungry "
+                android:layout_marginLeft="8dp"
+                android:textColor="@color/black"
+                android:textSize="10sp"
+                android:textStyle="bold"
+                android:visibility="invisible"/>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/selectAnimal"
+                android:layout_width="120dp"
+                android:layout_height="30dp"
+                android:text="Select Animal"
+                android:textSize="4dp" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="120dp"
+                android:layout_height="30dp"
+                android:id="@+id/pictureOfDog"/>
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+
+
+
+</androidx.cardview.widget.CardView>

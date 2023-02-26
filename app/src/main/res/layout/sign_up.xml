@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <EditText
+        android:id="@+id/email"
+        android:layout_width="350dp"
+        android:layout_height="47dp"
+        android:layout_marginStart="29dp"
+        android:layout_marginTop="80dp"
+        android:ems="10"
+        android:hint="Enter Email"
+        android:inputType="textEmailAddress"
+        android:minHeight="48dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/password3"
+        android:layout_width="350dp"
+        android:layout_height="54dp"
+        android:layout_marginStart="29dp"
+        android:layout_marginTop="7dp"
+        android:ems="10"
+        android:hint="Enter Password"
+        android:inputType="textPassword"
+        android:minHeight="48dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/email" />
+
+    <EditText
+        android:id="@+id/password4"
+        android:layout_width="350dp"
+        android:layout_height="54dp"
+        android:layout_marginStart="29dp"
+        android:layout_marginTop="7dp"
+        android:ems="10"
+        android:hint="Retype Password"
+        android:inputType="textPassword"
+        android:minHeight="48dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/password3" />
+
+    <EditText
+        android:id="@+id/Name"
+        android:layout_width="350dp"
+        android:layout_height="54dp"
+        android:layout_marginStart="29dp"
+        android:layout_marginTop="7dp"
+        android:ems="10"
+        android:hint="Enter Name"
+        android:minHeight="48dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/password4" />
+
+    <EditText
+        android:id="@+id/DateOfBirth"
+        android:layout_width="350dp"
+        android:layout_height="54dp"
+        android:layout_marginStart="29dp"
+        android:layout_marginTop="7dp"
+        android:ems="10"
+        android:hint="Enter Date of Birth"
+        android:minHeight="48dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Name" />
+
+
+    <CheckBox
+        android:id="@+id/my_checkbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="29dp"
+        android:text="Shelter Organisation"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/DateOfBirth" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/backButton"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="84dp"
+        android:layout_marginTop="350dp"
+        android:backgroundTint="@color/design_default_color_secondary"
+        android:text="Back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/password4" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/createAccount"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="84dp"
+        android:layout_marginTop="308dp"
+        android:backgroundTint="@color/design_default_color_secondary"
+        android:text="Create Account"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/password4" />
+</androidx.constraintlayout.widget.ConstraintLayout>
