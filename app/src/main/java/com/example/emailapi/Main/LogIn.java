@@ -26,7 +26,6 @@ public class LogIn extends AppCompatActivity {
     EditText email1, password1;
     GoogleSignInOptions gso;
     GoogleSignInClient gsc;
-    ImageView googleBtn;
     Button bLogin, SignUp;
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
@@ -40,16 +39,11 @@ public class LogIn extends AppCompatActivity {
         password1 = findViewById(R.id.password);
         SignUp = findViewById(R.id.SignUp);
 
-        googleBtn = findViewById(R.id.google_btn);
         gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
         gsc = GoogleSignIn.getClient(this,gso);
         mAuth = FirebaseAuth.getInstance();
 
-        /*
-        GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
-        if(acct!=null){
-            navigateToSecondActivity();
-        }*/
+
         SignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -70,12 +64,7 @@ public class LogIn extends AppCompatActivity {
             }
         });
 
-        googleBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                signIn();
-            }
-        });
+
     }
 
     void signIn(){

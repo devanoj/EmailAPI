@@ -4,15 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#891536"
+    android:background="#9a183d"
     tools:context="Main.SecondActivity">
-
 
 
     <Button
         android:id="@+id/exloreButton"
         android:layout_width="145dp"
         android:layout_height="80dp"
+        android:layout_marginBottom="204dp"
         android:backgroundTint="#8B0000"
         android:text="Explore"
         android:textColor="@color/black"
@@ -23,17 +23,20 @@
         android:id="@+id/homeButton"
         android:layout_width="145dp"
         android:layout_height="80dp"
+        android:layout_marginBottom="204dp"
         android:backgroundTint="#8B0000"
         android:text="Home"
         android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/exloreButton"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/settingsButton"
         android:layout_width="145dp"
         android:layout_height="80dp"
+        android:layout_marginBottom="204dp"
         android:backgroundTint="#8B0000"
         android:text="Settings"
         android:textColor="@color/black"
@@ -65,8 +68,8 @@
         android:id="@+id/SignOut"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="288dp"
-        android:layout_marginBottom="80dp"
+        android:layout_marginStart="264dp"
+        android:layout_marginBottom="312dp"
         android:text="Sign Out"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -76,7 +79,7 @@
         android:layout_width="420dp"
         android:layout_height="48dp"
         android:layout_marginBottom="750dp"
-        android:backgroundTint="#c44a1e"
+        android:backgroundTint="#155d89"
         android:text="Update Information on User"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -172,6 +175,14 @@
         app:layout_constraintTop_toBottomOf="@+id/AgeEdit" />
 
 
-
+    <ImageView
+        android:id="@+id/ExploreAnimal"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="736dp"
+        android:layout_marginEnd="180dp"
+        android:src="@drawable/ic5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

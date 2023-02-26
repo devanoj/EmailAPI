@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
+    android:background="#9a183d"
     >
 
     <TextView
@@ -68,7 +68,7 @@
         android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="20dp"
-        android:backgroundTint="@color/design_default_color_secondary"
+        android:backgroundTint="#155d89"
         android:text="LOGIN" />
 
     <com.google.android.material.button.MaterialButton
@@ -84,31 +84,10 @@
         android:backgroundTint="@color/design_default_color_secondary"
         android:text="SignUp" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/others"
-        android:layout_above="@id/socialicons"
-        android:text="or sign in with"
-        android:layout_centerHorizontal="true"/>
 
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/socialicons"
-        android:layout_alignParentBottom="true"
-        android:gravity="center">
 
 
-        <ImageView
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_margin="20dp"
-            android:id="@+id/google_btn"
-            android:src="@drawable/google"/>
-
-    </LinearLayout>
 
 
 </RelativeLayout>

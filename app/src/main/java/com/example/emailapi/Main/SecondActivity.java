@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,6 +41,7 @@ public class SecondActivity extends AppCompatActivity {
     Button SignOut1, infoButton, home, settings, explore, submit1, deleteB, searchAct;
     EditText inputName, inputAge, inputFT, inputLS;
     TextView viewEmail;
+    ImageView animalExplore;
 
     public String email1;
     public String userId;
@@ -63,6 +65,7 @@ public class SecondActivity extends AppCompatActivity {
         submit1 = findViewById(R.id.submitButton);
         deleteB = findViewById(R.id.deleteUser);
         searchAct = findViewById(R.id.Search);
+        animalExplore = findViewById(R.id.ExploreAnimal);
 
         inputName = findViewById(R.id.NameEdit);
         inputAge = findViewById(R.id.AgeEdit);
@@ -87,6 +90,14 @@ public class SecondActivity extends AppCompatActivity {
             viewEmail.setText(email);
         }
 
+        animalExplore.setOnClickListener(v -> {
+            Bundle bundle1 = new Bundle();
+            Intent intent1 = new Intent(SecondActivity.this, Explore.class);
+            intent1.putExtras(bundle1);
+            startActivity(intent1);
+        });
+
+
         searchAct.setOnClickListener(v -> {
             Bundle bundle1 = new Bundle();
             Intent intent1 = new Intent(SecondActivity.this, Filtering.class);
@@ -101,6 +112,8 @@ public class SecondActivity extends AppCompatActivity {
             intent1.putExtras(bundle1);
             startActivity(intent1);
         });
+
+
 
         explore.setOnClickListener(view1 -> {
             Bundle bundle2 = new Bundle();
@@ -131,33 +144,6 @@ public class SecondActivity extends AppCompatActivity {
             UserDAO uDAO = new UserDAO(person1, userId);
             Toast.makeText(SecondActivity.this, "Updated Data", Toast.LENGTH_SHORT).show();
         });
-
-
-        /**
-        name = findViewById(R.id.name);
-        email = findViewById(R.id.email);
-        signOutBtn = findViewById(R.id.signout);
-
-
-        gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
-        gsc = GoogleSignIn.getClient(this,gso);
-
-        GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
-        if(acct!=null){
-            String personName = acct.getDisplayName();
-            String personEmail = acct.getEmail();
-            name.setText(personName);
-            email.setText(personEmail);
-        }
-
-        signOutBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                signOut();
-            }
-        }); */
-
-
     }
 
     private void isItOrg(String userId) {
@@ -178,22 +164,6 @@ public class SecondActivity extends AppCompatActivity {
     }
 
     private void updateUser(boolean x) {
-        /**if (isEditTextVisible) {
-            inputName.setVisibility(View.INVISIBLE);
-            inputAge.setVisibility(View.INVISIBLE);
-            inputFT.setVisibility(View.INVISIBLE);
-            inputLS.setVisibility(View.INVISIBLE);
-            submit1.setVisibility(View.INVISIBLE);
-            isEditTextVisible = false;
-        }
-        else {
-            inputName.setVisibility(View.VISIBLE);
-            inputAge.setVisibility(View.VISIBLE);
-            inputFT.setVisibility(View.VISIBLE);
-            inputLS.setVisibility(View.VISIBLE);
-            submit1.setVisibility(View.VISIBLE);
-            isEditTextVisible = true;
-        } **/
 
         if (!isEditTextVisible && !x) {
             inputName.setVisibility(View.VISIBLE);
