@@ -121,13 +121,13 @@
         app:layout_constraintEnd_toEndOf="parent" />
 
     <EditText
-        android:id="@+id/AgeEdit"
+        android:id="@+id/freeTimeEdit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="0dp"
         android:ems="10"
-        android:hint="Age"
+        android:hint="Free Time"
         android:inputType="textPersonName"
         android:minHeight="48dp"
         android:visibility="invisible"
@@ -138,23 +138,23 @@
         android:id="@+id/lifestyleEdit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="17dp"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="0dp"
         android:ems="10"
-        android:hint="lifestyle"
+        android:hint="Lifestyle"
         android:inputType="textPersonName"
         android:visibility="invisible"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/AgeEdit" />
+        app:layout_constraintTop_toBottomOf="@+id/freeTimeEdit" />
 
     <EditText
-        android:id="@+id/freeTimeEdit"
+        android:id="@+id/AgeEdit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="17dp"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="0dp"
         android:ems="10"
-        android:hint="freeTime"
+        android:hint="Date of Birth"
         android:inputType="textPersonName"
         android:visibility="invisible"
         app:layout_constraintStart_toStartOf="parent"
@@ -169,7 +169,9 @@
         android:text="Submit"
         android:visibility="invisible"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/freeTimeEdit" />
+        app:layout_constraintTop_toBottomOf="@+id/AgeEdit" />
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
