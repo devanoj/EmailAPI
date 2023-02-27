@@ -37,7 +37,7 @@ import com.google.firebase.storage.UploadTask;
 import org.json.JSONObject;
 
 public class Explore extends AppCompatActivity {
-    Button home, settings, explore, inputAnimal, infoButton1, displayAnimalbutton, imageUP, goFilter, mButtonChooseImage, aOptions;
+    Button inputAnimal, infoButton1, goFilter, mButtonChooseImage, aOptions;
     EditText inputName1, inputAge1, inputBreed, inputEnergy;
     TextView data;
     ImageView animalExplore, Profile1, Filter1, Find1, HomeMain1;
@@ -57,9 +57,6 @@ public class Explore extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.explore_layout);
 
-        // Button
-        home = findViewById(R.id.homeButton);
-        settings = findViewById(R.id.settingsButton);
         inputAnimal = findViewById(R.id.submitButton1);
         infoButton1 = findViewById(R.id.addInfoButton1);
         goFilter = findViewById(R.id.GoToFilter);
@@ -121,19 +118,6 @@ public class Explore extends AppCompatActivity {
             startActivity(intent2);
         });
 
-        home.setOnClickListener(view1 -> {
-            Bundle bundle2 = new Bundle();
-            Intent intent2 = new Intent(Explore.this, Profile.class);
-            intent2.putExtras(bundle2);
-            startActivity(intent2);
-        });
-
-        settings.setOnClickListener(view -> {
-            Bundle bundle2 = new Bundle();
-            Intent intent2 = new Intent(Explore.this, FindActivity.class);
-            intent2.putExtras(bundle2);
-            startActivity(intent2);
-        });
 
         infoButton1.setOnClickListener(view -> {
             if (isVisible) {

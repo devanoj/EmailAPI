@@ -6,6 +6,50 @@
     android:layout_height="match_parent"
     android:background="#9a183d">
 
+    <TextView
+        android:id="@+id/welcome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="270dp"
+        android:layout_marginBottom="750dp"
+        android:fontFamily="@font/jacques_francois"
+        android:text="Welcome"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/nameDisplay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="120dp"
+        android:layout_marginBottom="750dp"
+        android:fontFamily="@font/jacques_francois"
+        android:textSize="25sp"
+        android:textStyle="italic"
+        android:text="---"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/dogfact"
+        android:textSize="18sp"
+        android:textAlignment="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="70dp"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="260dp"
+        android:fontFamily="@font/jacques_francois"
+        android:text="---------------- ------ ---------------- --"
+
+        android:layout_centerInParent="true"
+        android:background="@drawable/round"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
 
     <ImageView
         android:id="@+id/ExploreAnimal"

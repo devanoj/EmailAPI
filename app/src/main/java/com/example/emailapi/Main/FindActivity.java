@@ -33,7 +33,6 @@ import java.util.ArrayList;
 
 
 public class FindActivity extends AppCompatActivity {
-    Button home, settings, explore, calTest;
     RecyclerView recyclerView;
     DatabaseReference dref;
     FirebaseRecyclerOptions<Animal> options;
@@ -47,10 +46,6 @@ public class FindActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.find_layout);
-
-        //Buttons
-        explore = findViewById(R.id.exloreButton);
-        home = findViewById(R.id.homeButton);
 
         recyclerView = findViewById(R.id.recyclerview);//
         recyclerView.setHasFixedSize(true);
@@ -91,19 +86,7 @@ public class FindActivity extends AppCompatActivity {
             startActivity(intent1);
         });
 
-        explore.setOnClickListener(view1 -> {
-            Bundle bundle2 = new Bundle();
-            Intent intent2 = new Intent(FindActivity.this, Explore.class);
-            intent2.putExtras(bundle2);
-            startActivity(intent2);
-        });
 
-        home.setOnClickListener(view1 -> {
-            Bundle bundle2 = new Bundle();
-            Intent intent2 = new Intent(FindActivity.this, Profile.class);
-            intent2.putExtras(bundle2);
-            startActivity(intent2);
-        });
 
         editText.addTextChangedListener(new TextWatcher() {
             @Override

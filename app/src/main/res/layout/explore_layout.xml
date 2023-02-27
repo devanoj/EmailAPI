@@ -29,37 +29,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/exloreButton"
-        android:layout_width="145dp"
-        android:layout_height="80dp"
-        android:backgroundTint="#8B0000"
-        android:text="Explore"
-        android:textColor="@color/black"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/settingsButton" />
-
-    <Button
-        android:id="@+id/homeButton"
-        android:layout_width="145dp"
-        android:layout_height="80dp"
-        android:text="Home"
-        android:backgroundTint="#8B0000"
-        android:textColor="@color/black"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/exloreButton"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/settingsButton"
-        android:layout_width="145dp"
-        android:layout_height="80dp"
-        android:text="Settings"
-        android:backgroundTint="#8B0000"
-        android:textColor="@color/black"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
     <EditText
         android:id="@+id/NameEdit1"
         android:layout_width="wrap_content"

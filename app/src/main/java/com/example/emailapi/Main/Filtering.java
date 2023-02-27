@@ -22,7 +22,7 @@ import java.io.UnsupportedEncodingException;
 
 public class Filtering extends AppCompatActivity {
     TextView dataFilter, DogName;
-    Button b1, getRequest;
+    Button getRequest;
     EditText EnterDogName;
     ImageView animalExplore, Profile1, Filter1, Find1, HomeMain1;
 
@@ -39,8 +39,6 @@ public class Filtering extends AppCompatActivity {
         Filter1 = findViewById(R.id.Filter);
         Find1 = findViewById(R.id.Find);
         HomeMain1 = findViewById(R.id.HomeMain);
-
-        b1 = findViewById(R.id.toHome);
 
         Profile1.setOnClickListener(v -> {
             Bundle bundle1 = new Bundle();
@@ -69,17 +67,9 @@ public class Filtering extends AppCompatActivity {
 
 
         getRequest();
-        b1.setOnClickListener(v -> {
-            goHome();
-        });
     }
 
-    private void goHome() {
-        Bundle bundle2 = new Bundle();
-        Intent intent2 = new Intent(Filtering.this, Profile.class);
-        intent2.putExtras(bundle2);
-        startActivity(intent2);
-    }
+
 
     private void getRequest() {
         try {

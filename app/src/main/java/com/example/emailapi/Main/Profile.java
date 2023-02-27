@@ -38,7 +38,7 @@ public class Profile extends AppCompatActivity {
     TextView name;
     Button button1;
 
-    Button SignOut1, infoButton, home, settings, explore, submit1, deleteB, searchAct;
+    Button SignOut1, infoButton, submit1, deleteB, searchAct;
     EditText inputName, inputAge, inputFT, inputLS;
     TextView viewEmail;
     ImageView animalExplore, Profile1, Filter1, Find1, HomeMain1;
@@ -56,12 +56,9 @@ public class Profile extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.profile_layout);
-        Bundle bundle = getIntent().getExtras();
 
         SignOut1 = findViewById(R.id.SignOut);
         infoButton = findViewById(R.id.addInfoButton);
-        explore = findViewById(R.id.exloreButton);
-        settings = findViewById(R.id.settingsButton);
         submit1 = findViewById(R.id.submitButton);
         deleteB = findViewById(R.id.deleteUser);
         searchAct = findViewById(R.id.Search);
@@ -77,7 +74,7 @@ public class Profile extends AppCompatActivity {
         inputFT = findViewById(R.id.freeTimeEdit);
         inputLS = findViewById(R.id.lifestyleEdit);
 
-        viewEmail = findViewById(R.id.textView2);
+
 
         gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
         gsc = GoogleSignIn.getClient(this,gso);
@@ -89,11 +86,7 @@ public class Profile extends AppCompatActivity {
             userId = currentUser.getUid();
         }
 
-        if (bundle != null) {
-            String email = bundle.getString("email");
-            String password = bundle.getString("password");
-            viewEmail.setText(email);
-        }
+
 
         animalExplore.setOnClickListener(v -> {
             Bundle bundle1 = new Bundle();
@@ -134,20 +127,6 @@ public class Profile extends AppCompatActivity {
             Intent intent1 = new Intent(Profile.this, LogIn.class);
             intent1.putExtras(bundle1);
             startActivity(intent1);
-        });
-
-        explore.setOnClickListener(view1 -> {
-            Bundle bundle2 = new Bundle();
-            Intent intent2 = new Intent(Profile.this, Explore.class);
-            intent2.putExtras(bundle2);
-            startActivity(intent2);
-        });
-
-        settings.setOnClickListener(view -> {
-            Bundle bundle2 = new Bundle();
-            Intent intent2 = new Intent(Profile.this, FindActivity.class);
-            intent2.putExtras(bundle2);
-            startActivity(intent2);
         });
 
         infoButton.setOnClickListener(view -> {

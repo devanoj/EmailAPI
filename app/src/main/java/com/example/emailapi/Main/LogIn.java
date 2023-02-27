@@ -115,7 +115,7 @@ public class LogIn extends AppCompatActivity {
                                 bundle.putString("email", email);
                                 bundle.putString("password", password);
 
-                                Intent intent = new Intent(LogIn.this, Profile.class);
+                                Intent intent = new Intent(LogIn.this, Home.class);
                                 intent.putExtras(bundle);
                                 startActivity(intent);
                             } else {

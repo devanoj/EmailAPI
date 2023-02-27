@@ -9,35 +9,50 @@
 
     <EditText
         android:id="@+id/email"
-        android:layout_width="350dp"
-        android:layout_height="47dp"
-        android:layout_marginStart="29dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
         android:layout_marginTop="80dp"
         android:ems="10"
         android:hint="Enter Email"
         android:inputType="textEmailAddress"
         android:minHeight="48dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:padding="20dp"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:background="#30ffffff"/>
 
     <EditText
         android:id="@+id/password3"
-        android:layout_width="350dp"
-        android:layout_height="54dp"
-        android:layout_marginStart="29dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
         android:layout_marginTop="7dp"
         android:ems="10"
         android:hint="Enter Password"
         android:inputType="textPassword"
         android:minHeight="48dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/email" />
+        app:layout_constraintTop_toBottomOf="@+id/email"
+        android:padding="20dp"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:background="#30ffffff"/>
 
     <EditText
         android:id="@+id/password4"
-        android:layout_width="350dp"
-        android:layout_height="54dp"
-        android:layout_marginStart="29dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:padding="20dp"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:background="#30ffffff"
         android:layout_marginTop="7dp"
         android:ems="10"
         android:hint="Retype Password"
@@ -48,9 +63,14 @@
 
     <EditText
         android:id="@+id/Name"
-        android:layout_width="350dp"
-        android:layout_height="54dp"
-        android:layout_marginStart="29dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:padding="20dp"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:background="#30ffffff"
         android:layout_marginTop="7dp"
         android:ems="10"
         android:hint="Enter Name"
@@ -60,9 +80,14 @@
 
     <EditText
         android:id="@+id/DateOfBirth"
-        android:layout_width="350dp"
-        android:layout_height="54dp"
-        android:layout_marginStart="29dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:padding="20dp"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:background="#30ffffff"
         android:layout_marginTop="7dp"
         android:ems="10"
         android:hint="Enter Date of Birth"
@@ -77,29 +102,28 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="29dp"
         android:text="Shelter Organisation"
+        android:layout_marginTop="7dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/DateOfBirth" />
 
-    <com.google.android.material.button.MaterialButton
+    <Button
         android:id="@+id/backButton"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginStart="84dp"
         android:layout_marginTop="350dp"
-        android:backgroundTint="@color/design_default_color_secondary"
         android:text="Back"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/password4" />
 
-    <com.google.android.material.button.MaterialButton
+    <Button
         android:id="@+id/createAccount"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginStart="84dp"
         android:layout_marginTop="308dp"
-        android:backgroundTint="@color/design_default_color_secondary"
         android:text="Create Account"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/password4" />
