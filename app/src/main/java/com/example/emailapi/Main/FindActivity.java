@@ -6,7 +6,6 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
@@ -69,7 +68,7 @@ public class FindActivity extends AppCompatActivity {
         });
         animalExplore.setOnClickListener(v -> {
             Bundle bundle1 = new Bundle();
-            Intent intent1 = new Intent(FindActivity.this, Explore.class);
+            Intent intent1 = new Intent(FindActivity.this, Create.class);
             intent1.putExtras(bundle1);
             startActivity(intent1);
         });

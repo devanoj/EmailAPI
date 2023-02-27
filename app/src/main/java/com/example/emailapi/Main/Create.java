@@ -4,22 +4,15 @@ import android.content.ContentResolver;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
 import com.example.emailapi.DAO.AnimalDAO;
 import com.example.emailapi.Entity.Animal;
 import com.example.emailapi.R;
@@ -34,12 +27,9 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
 
-import org.json.JSONObject;
-
-public class Explore extends AppCompatActivity {
-    Button inputAnimal, infoButton1, goFilter, mButtonChooseImage, aOptions;
+public class Create extends AppCompatActivity {
+    Button inputAnimal, infoButton1, mButtonChooseImage, aOptions;
     EditText inputName1, inputAge1, inputBreed, inputEnergy;
-    TextView data;
     ImageView animalExplore, Profile1, Filter1, Find1, HomeMain1;
     boolean isVisible = false;
 
@@ -55,11 +45,10 @@ public class Explore extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.explore_layout);
+        setContentView(R.layout.create_layout);
 
         inputAnimal = findViewById(R.id.submitButton1);
         infoButton1 = findViewById(R.id.addInfoButton1);
-        goFilter = findViewById(R.id.GoToFilter);
         mButtonChooseImage = findViewById(R.id.button_choose_image);
         aOptions = findViewById(R.id.AnimalOptions);
         // EditText
@@ -67,7 +56,7 @@ public class Explore extends AppCompatActivity {
         inputAge1 = findViewById(R.id.AgeEdit1);
         inputBreed = findViewById(R.id.breed);
         inputEnergy = findViewById(R.id.energyLevel);
-        data = findViewById(R.id.animal_fact);
+
         // ImageView
         animalExplore = findViewById(R.id.ExploreAnimal);
         Profile1 = findViewById(R.id.Profile);
@@ -80,43 +69,38 @@ public class Explore extends AppCompatActivity {
 
         Profile1.setOnClickListener(v -> {
             Bundle bundle1 = new Bundle();
-            Intent intent1 = new Intent(Explore.this, Profile.class);
+            Intent intent1 = new Intent(Create.this, Profile.class);
             intent1.putExtras(bundle1);
             startActivity(intent1);
         });
         Filter1.setOnClickListener(v -> {
             Bundle bundle1 = new Bundle();
-            Intent intent1 = new Intent(Explore.this, Filtering.class);
+            Intent intent1 = new Intent(Create.this, Filtering.class);
             intent1.putExtras(bundle1);
             startActivity(intent1);
         });
         Find1.setOnClickListener(v -> {
             Bundle bundle1 = new Bundle();
-            Intent intent1 = new Intent(Explore.this, FindActivity.class);
+            Intent intent1 = new Intent(Create.this, FindActivity.class);
             intent1.putExtras(bundle1);
             startActivity(intent1);
         });
         HomeMain1.setOnClickListener(v -> {
             Bundle bundle1 = new Bundle();
-            Intent intent1 = new Intent(Explore.this, Home.class);
+            Intent intent1 = new Intent(Create.this, Home.class);
             intent1.putExtras(bundle1);
             startActivity(intent1);
         });
 
         aOptions.setOnClickListener(v0 -> {
             Bundle bundle2 = new Bundle();
-            Intent intent2 = new Intent(Explore.this, AnimalRUD.class);
+            Intent intent2 = new Intent(Create.this, AnimalRUD.class);
             intent2.putExtras(bundle2);
             startActivity(intent2);
         });
 
         mButtonChooseImage.setOnClickListener(v -> openFileChooser());
-        goFilter.setOnClickListener(v -> {
-            Bundle bundle2 = new Bundle();
-            Intent intent2 = new Intent(Explore.this, Filtering.class);
-            intent2.putExtras(bundle2);
-            startActivity(intent2);
-        });
+
 
 
         infoButton1.setOnClickListener(view -> {
@@ -166,7 +150,7 @@ public class Explore extends AppCompatActivity {
                                         Animal pet1 = new Animal(uid, id, inputName1.getText().toString(), inputAge1.getText().toString(), inputBreed.getText().toString(), inputEnergy.getText().toString(),
                                                 email1, imageUrl);
                                         AnimalDAO aDAO = new AnimalDAO(pet1);
-                                        Toast.makeText(Explore.this, "Entered Data", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(Create.this, "Entered Data", Toast.LENGTH_SHORT).show();
                                     }
                                 });
                             }
@@ -174,51 +158,15 @@ public class Explore extends AppCompatActivity {
                         .addOnFailureListener(new OnFailureListener() {
                             @Override
                             public void onFailure(Exception e) {
-                                Toast.makeText(Explore.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(Create.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                             }
                         });
             } else {
-                Toast.makeText(Explore.this, "No file selected", Toast.LENGTH_SHORT).show();
+                Toast.makeText(Create.this, "No file selected", Toast.LENGTH_SHORT).show();
             }
 
         });
 
-        String url = "https://catfact.ninja/fact";
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        try {
-                            //response = request.get(url, headers={'X-Api-Key': 'YOUR_API_KEY'}
-                            //String x = response.getString("facts");
-
-                            //JSONObject foo = response;
-                            //String facts = foo.get("facts").toString();
-                            //String datetime = response.getString("datetime");
-                            //String date = datetime.split("T")[0];
-
-                            //Log.e("onResponse", String.valueOf(response));
-
-                            String x = response.getString("fact");
-
-                            /*
-                            JSONObject jsonObject = new JSONObject((Map) response);
-                            String x = jsonObject.getString("facts");*/
-
-
-                            data.setText(x);
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.e("ErrorVolley", error.toString());
-                Toast.makeText(Explore.this, "Error", Toast.LENGTH_SHORT).show();
-            }
-        });
-        Volley.newRequestQueue(this).add(request);
 
 
     }

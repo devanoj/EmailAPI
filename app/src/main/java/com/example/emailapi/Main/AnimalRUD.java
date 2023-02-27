@@ -56,7 +56,7 @@ public class AnimalRUD extends AppCompatActivity {
 
         backButton.setOnClickListener(v -> {
             Bundle bundle2 = new Bundle();
-            Intent intent2 = new Intent(AnimalRUD.this, Explore.class);
+            Intent intent2 = new Intent(AnimalRUD.this, Create.class);
             intent2.putExtras(bundle2);
             startActivity(intent2);
         });

@@ -134,7 +134,7 @@ public class Home extends AppCompatActivity {
         });
         animalExplore.setOnClickListener(v -> {
             Bundle bundle1 = new Bundle();
-            Intent intent1 = new Intent(Home.this, Explore.class);
+            Intent intent1 = new Intent(Home.this, Create.class);
             intent1.putExtras(bundle1);
             startActivity(intent1);
         });

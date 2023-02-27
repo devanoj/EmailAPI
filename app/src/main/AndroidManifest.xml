@@ -87,7 +87,7 @@
         </activity>
 
         <activity
-            android:name=".Main.Explore"
+            android:name=".Main.Create"
             android:exported="true">
 
             <intent-filter>

@@ -7,8 +7,8 @@ import com.google.firebase.database.PropertyName;
 public class User {
     private String name;
     private String dateOfBirth;
-    private String lifestyle;
-    private String freeTime;
+    private String phoneNo;
+    private String eirCode;
     private String email;
     private String uid; // This is uid for some reason, it was like this before
     private Boolean organisation;
@@ -16,18 +16,18 @@ public class User {
     public User() {
         this.name="";
         this.dateOfBirth="";
-        this.lifestyle="";
-        this.freeTime="";
+        this.phoneNo="";
+        this.eirCode="";
         this.email="";
-        this.uid=""; //make this into uid
+        this.uid="";
         this.organisation=false;
     }
 
-    public User(String name, String dateOfBirth, String lifestyle, String freeTime, String email, String uid, Boolean organisation) {
+    public User(String name, String dateOfBirth, String phoneNo, String eirCode, String email, String uid, Boolean organisation) {
         this.name=name;
         this.dateOfBirth=dateOfBirth;
-        this.lifestyle=lifestyle;
-        this.freeTime=freeTime;
+        this.phoneNo=phoneNo;
+        this.eirCode=eirCode;
         this.email=email;
         this.uid=uid;
         this.organisation=organisation;
@@ -57,15 +57,15 @@ public class User {
         this.email = email;
     }
 
-    public String getFreeTime() {
-        return freeTime;
+    public String getEirCode() {
+        return eirCode;
     }
 
-    public String getLifestyle() {
-        return lifestyle;
+    public String getPhoneNo() {
+        return phoneNo;
     }
 
-    public String getAge() {
+    public String getDateOfBirth() {
         return dateOfBirth;
     }
 
@@ -77,16 +77,16 @@ public class User {
         this.name = name;
     }
 
-    public void setAge(String dateOfBirth) {
+    public void setDateOfBirth(String dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 
-    public void setFreeTime(String freeTime) {
-        this.freeTime = freeTime;
+    public void setEirCode(String eirCode) {
+        this.eirCode = eirCode;
     }
 
-    public void setLifestyle(String lifestyle) {
-        this.lifestyle = lifestyle;
+    public void setPhoneNo(String phoneNo) {
+        this.phoneNo = phoneNo;
     }
 
 
