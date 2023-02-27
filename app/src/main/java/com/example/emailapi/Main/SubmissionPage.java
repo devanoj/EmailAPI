@@ -1,8 +1,10 @@
 package com.example.emailapi.Main;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.ContentResolver;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -42,8 +44,8 @@ import javax.mail.internet.MimeMessage;
 
 
 public class SubmissionPage extends AppCompatActivity {
-    TextView nameDog, display, displaytime, inputName1, inputAge1, inputBreed, inputEnergy;
-    Button dateButton, cMail, deleteAnimal, updateAnimal, mButtonChooseImage, backToExplore, inputAnimal;
+    TextView nameDog, display, displaytime, inputName1, inputAge1, inputBreed, inputEnergy, meeting1;
+    Button dateButton, cMail, deleteAnimal, updateAnimal, mButtonChooseImage, backToHome, inputAnimal;
 
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
     FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -56,7 +58,14 @@ public class SubmissionPage extends AppCompatActivity {
     StorageReference mStorageRef;
     StorageTask mUploadTask;
 
-    String x = "Hi";
+    boolean isVisible = false;
+    String rEmail = "Anything@gmail.com";
+    String cUser;
+
+    {
+        assert currentUser != null;
+        cUser = currentUser.getUid();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,29 +79,32 @@ public class SubmissionPage extends AppCompatActivity {
         inputAge1 = findViewById(R.id.AgeEdit1);
         inputBreed = findViewById(R.id.breed);
         inputEnergy = findViewById(R.id.energyLevel);
+        meeting1 = findViewById(R.id.Meeting);
 
         dateButton = findViewById(R.id.button);
         cMail = findViewById(R.id.mail);
         deleteAnimal = findViewById(R.id.delete);
         updateAnimal = findViewById(R.id.update);
-        backToExplore = findViewById(R.id.goExplore);
+        backToHome = findViewById(R.id.goExplore);
         mButtonChooseImage = findViewById(R.id.button_choose_image);
         inputAnimal = findViewById(R.id.submitButton1);
 
-        backToExplore.setOnClickListener(v -> {
-            goBackToExplore();
+
+        userPermissions();
+        displayDogName();
+
+        backToHome.setOnClickListener(v -> {
+            goBackToHome();
         });
 
         deleteAnimal.setOnClickListener(v -> {
-            setUpDeleteButton();
-            goBackToExplore();
+            confirmDialog();
         });
 
         updateAnimal.setOnClickListener(v3 -> {
             showUpdate();
         });
 
-        nameDog.setText("Meeting date for: ");
         dateButton.setOnClickListener(view -> {
             openDatePickerDialog();
             openTimePickerDialog();
@@ -100,14 +112,67 @@ public class SubmissionPage extends AppCompatActivity {
 
         cMail.setOnClickListener(v1 -> {
             getMailFromFirebase();
-            goBackToExplore();
+            goBackToHome();
         });
 
     }
 
-    private void goBackToExplore() {
+    private void confirmDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Are you sure you want to proceed?")
+                .setCancelable(false)
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        setUpDeleteButton();
+                        goBackToHome();
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+        AlertDialog alert = builder.create();
+        alert.show();
+    }
+
+    private void displayDogName() {
+        Bundle getBundle = this.getIntent().getExtras();
+        String n = getBundle.getString("Name");
+        nameDog.setText(n);
+    }
+
+    private void userPermissions() {
+        drUser.child(cUser).child("organisation").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                boolean org = Boolean.TRUE.equals(snapshot.getValue(boolean.class));
+                if (org) {
+                    isOrganisation();
+                } else {
+                    isUser();
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {Toast.makeText(getApplicationContext(), "Organisation not found", Toast.LENGTH_SHORT).show();}
+        });
+    }
+
+    private void isUser() {
+        deleteAnimal.setVisibility(View.INVISIBLE);
+        updateAnimal.setVisibility(View.INVISIBLE);
+
+    }
+
+    private void isOrganisation() {
+        dateButton.setVisibility(View.INVISIBLE);
+        cMail.setVisibility(View.INVISIBLE);
+        meeting1.setVisibility(View.INVISIBLE);
+    }
+
+    private void goBackToHome() {
         Bundle bundle2 = new Bundle();
-        Intent intent2 = new Intent(SubmissionPage.this, Explore.class);
+        Intent intent2 = new Intent(SubmissionPage.this, Home.class);
         intent2.putExtras(bundle2);
         startActivity(intent2);
     }
@@ -116,14 +181,24 @@ public class SubmissionPage extends AppCompatActivity {
     private void showUpdate() {
         Bundle getBundle = this.getIntent().getExtras();
         String idUser = getBundle.getString("idFromUser");
-        String cUser = currentUser.getUid();
 
-        inputName1.setVisibility(View.VISIBLE);
-        inputAge1.setVisibility(View.VISIBLE);
-        inputBreed.setVisibility(View.VISIBLE);
-        inputEnergy.setVisibility(View.VISIBLE);
-        inputAnimal.setVisibility(View.VISIBLE);
-        mButtonChooseImage.setVisibility(View.VISIBLE);
+        if (isVisible) {
+            inputName1.setVisibility(View.INVISIBLE);
+            inputAge1.setVisibility(View.INVISIBLE);
+            inputBreed.setVisibility(View.INVISIBLE);
+            inputEnergy.setVisibility(View.INVISIBLE);
+            inputAnimal.setVisibility(View.INVISIBLE);
+            mButtonChooseImage.setVisibility(View.INVISIBLE);
+            isVisible = false;
+        } else {
+            inputName1.setVisibility(View.VISIBLE);
+            inputAge1.setVisibility(View.VISIBLE);
+            inputBreed.setVisibility(View.VISIBLE);
+            inputEnergy.setVisibility(View.VISIBLE);
+            inputAnimal.setVisibility(View.VISIBLE);
+            mButtonChooseImage.setVisibility(View.VISIBLE);
+            isVisible = true;
+        }
 
         mButtonChooseImage.setOnClickListener(v -> openFileChooser());
 
@@ -227,7 +302,8 @@ public class SubmissionPage extends AppCompatActivity {
         Bundle getBundle = this.getIntent().getExtras();
         String id = getBundle.getString("Id");
         String idUser = getBundle.getString("idFromUser");
-        String cUser = currentUser.getUid();
+
+
 
         if (cUser.equals(idUser)) {
             dr.child(id).removeValue()
@@ -239,13 +315,13 @@ public class SubmissionPage extends AppCompatActivity {
     }
 
     private void getMailFromFirebase() {
-        String cUser = currentUser.getUid();
+
         
         drUser.child(cUser).child("email").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                x = snapshot.getValue(String.class);
-                confirmAndMail(x);
+                rEmail = snapshot.getValue(String.class);
+                confirmAndMail(rEmail);
             }
 
             @Override
