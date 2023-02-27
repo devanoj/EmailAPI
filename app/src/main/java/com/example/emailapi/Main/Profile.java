@@ -32,7 +32,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 
-public class SecondActivity extends AppCompatActivity {
+public class Profile extends AppCompatActivity {
     GoogleSignInOptions gso;
     GoogleSignInClient gsc;
     TextView name;
@@ -41,7 +41,7 @@ public class SecondActivity extends AppCompatActivity {
     Button SignOut1, infoButton, home, settings, explore, submit1, deleteB, searchAct;
     EditText inputName, inputAge, inputFT, inputLS;
     TextView viewEmail;
-    ImageView animalExplore;
+    ImageView animalExplore, Profile1, Filter1, Find1, HomeMain1;
 
     public String email1;
     public String userId;
@@ -55,7 +55,7 @@ public class SecondActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.profile_layout);
         Bundle bundle = getIntent().getExtras();
 
         SignOut1 = findViewById(R.id.SignOut);
@@ -65,7 +65,12 @@ public class SecondActivity extends AppCompatActivity {
         submit1 = findViewById(R.id.submitButton);
         deleteB = findViewById(R.id.deleteUser);
         searchAct = findViewById(R.id.Search);
+
         animalExplore = findViewById(R.id.ExploreAnimal);
+        Profile1 = findViewById(R.id.Profile);
+        Filter1 = findViewById(R.id.Filter);
+        Find1 = findViewById(R.id.Find);
+        HomeMain1 = findViewById(R.id.HomeMain);
 
         inputName = findViewById(R.id.NameEdit);
         inputAge = findViewById(R.id.AgeEdit);
@@ -92,7 +97,25 @@ public class SecondActivity extends AppCompatActivity {
 
         animalExplore.setOnClickListener(v -> {
             Bundle bundle1 = new Bundle();
-            Intent intent1 = new Intent(SecondActivity.this, Explore.class);
+            Intent intent1 = new Intent(Profile.this, Explore.class);
+            intent1.putExtras(bundle1);
+            startActivity(intent1);
+        });
+        Filter1.setOnClickListener(v -> {
+            Bundle bundle1 = new Bundle();
+            Intent intent1 = new Intent(Profile.this, Filtering.class);
+            intent1.putExtras(bundle1);
+            startActivity(intent1);
+        });
+        Find1.setOnClickListener(v -> {
+            Bundle bundle1 = new Bundle();
+            Intent intent1 = new Intent(Profile.this, FindActivity.class);
+            intent1.putExtras(bundle1);
+            startActivity(intent1);
+        });
+        HomeMain1.setOnClickListener(v -> {
+            Bundle bundle1 = new Bundle();
+            Intent intent1 = new Intent(Profile.this, Home.class);
             intent1.putExtras(bundle1);
             startActivity(intent1);
         });
@@ -100,31 +123,29 @@ public class SecondActivity extends AppCompatActivity {
 
         searchAct.setOnClickListener(v -> {
             Bundle bundle1 = new Bundle();
-            Intent intent1 = new Intent(SecondActivity.this, Filtering.class);
+            Intent intent1 = new Intent(Profile.this, Filtering.class);
             intent1.putExtras(bundle1);
             startActivity(intent1);
         });
 
         SignOut1.setOnClickListener(view -> {
-            Toast.makeText(SecondActivity.this, "User signed out", Toast.LENGTH_SHORT).show();
+            Toast.makeText(Profile.this, "User signed out", Toast.LENGTH_SHORT).show();
             Bundle bundle1 = new Bundle();
-            Intent intent1 = new Intent(SecondActivity.this, LogIn.class);
+            Intent intent1 = new Intent(Profile.this, LogIn.class);
             intent1.putExtras(bundle1);
             startActivity(intent1);
         });
 
-
-
         explore.setOnClickListener(view1 -> {
             Bundle bundle2 = new Bundle();
-            Intent intent2 = new Intent(SecondActivity.this, Explore.class);
+            Intent intent2 = new Intent(Profile.this, Explore.class);
             intent2.putExtras(bundle2);
             startActivity(intent2);
         });
 
         settings.setOnClickListener(view -> {
             Bundle bundle2 = new Bundle();
-            Intent intent2 = new Intent(SecondActivity.this, SettingsActivity.class);
+            Intent intent2 = new Intent(Profile.this, FindActivity.class);
             intent2.putExtras(bundle2);
             startActivity(intent2);
         });
@@ -142,7 +163,7 @@ public class SecondActivity extends AppCompatActivity {
         submit1.setOnClickListener(view -> {
             User person1 = new User(inputName.getText().toString(), inputAge.getText().toString(), inputLS.getText().toString(), inputFT.getText().toString(), email1, userId, true);
             UserDAO uDAO = new UserDAO(person1, userId);
-            Toast.makeText(SecondActivity.this, "Updated Data", Toast.LENGTH_SHORT).show();
+            Toast.makeText(Profile.this, "Updated Data", Toast.LENGTH_SHORT).show();
         });
     }
 
@@ -212,10 +233,10 @@ public class SecondActivity extends AppCompatActivity {
                         }
                     });
         }
-        Toast.makeText(SecondActivity.this, "User Data has been deleted", Toast.LENGTH_SHORT).show();
-        Toast.makeText(SecondActivity.this, "Back to Login Page", Toast.LENGTH_SHORT).show();
+        Toast.makeText(Profile.this, "User Data has been deleted", Toast.LENGTH_SHORT).show();
+        Toast.makeText(Profile.this, "Back to Login Page", Toast.LENGTH_SHORT).show();
         Bundle bundle1 = new Bundle();
-        Intent intent1 = new Intent(SecondActivity.this, LogIn.class);
+        Intent intent1 = new Intent(Profile.this, LogIn.class);
         intent1.putExtras(bundle1);
         startActivity(intent1);
 

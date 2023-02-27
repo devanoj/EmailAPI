@@ -46,7 +46,7 @@ public class AnimalRUD extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_rud);
+        setContentView(R.layout.rud_layout);
 
         backButton = findViewById(R.id.buttonBack);
 
@@ -114,7 +114,7 @@ public class AnimalRUD extends AppCompatActivity {
             @Override
             public CategoryViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
                 View v = LayoutInflater.from(parent.getContext())
-                        .inflate(R.layout.layout_tasklist_lookup,parent,false);
+                        .inflate(R.layout.animal_rcv_layout,parent,false);
 
                 return new CategoryViewHolder(v, parent.getContext());
             }

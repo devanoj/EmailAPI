@@ -29,7 +29,7 @@ public class SignUp extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.sign_up);
+        setContentView(R.layout.sign_up_layout);
 
         createAcc = findViewById(R.id.createAccount);
         goBack = findViewById(R.id.backButton);

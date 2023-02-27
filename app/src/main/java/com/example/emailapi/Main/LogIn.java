@@ -8,7 +8,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.emailapi.R;
@@ -32,7 +31,7 @@ public class LogIn extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.login_layout);
 
         bLogin = findViewById(R.id.loginbtn);
         email1 = findViewById(R.id.username);
@@ -97,7 +96,7 @@ public class LogIn extends AppCompatActivity {
         finish();
         Bundle bundle = new Bundle();
         bundle.putString("email", email);
-        Intent intent = new Intent(LogIn.this, SecondActivity.class);
+        Intent intent = new Intent(LogIn.this, Profile.class);
         intent.putExtras(bundle);
         startActivity(intent);
     }
@@ -116,7 +115,7 @@ public class LogIn extends AppCompatActivity {
                                 bundle.putString("email", email);
                                 bundle.putString("password", password);
 
-                                Intent intent = new Intent(LogIn.this, SecondActivity.class);
+                                Intent intent = new Intent(LogIn.this, Profile.class);
                                 intent.putExtras(bundle);
                                 startActivity(intent);
                             } else {

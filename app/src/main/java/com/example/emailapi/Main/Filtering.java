@@ -1,11 +1,9 @@
 package com.example.emailapi.Main;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -13,8 +11,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.emailapi.R;
@@ -28,19 +24,51 @@ public class Filtering extends AppCompatActivity {
     TextView dataFilter, DogName;
     Button b1, getRequest;
     EditText EnterDogName;
+    ImageView animalExplore, Profile1, Filter1, Find1, HomeMain1;
 
     String outputSim;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.filter_activity);
+        setContentView(R.layout.filter_layout);
+
+        // ImageView
+        animalExplore = findViewById(R.id.ExploreAnimal);
+        Profile1 = findViewById(R.id.Profile);
+        Filter1 = findViewById(R.id.Filter);
+        Find1 = findViewById(R.id.Find);
+        HomeMain1 = findViewById(R.id.HomeMain);
 
         b1 = findViewById(R.id.toHome);
 
+        Profile1.setOnClickListener(v -> {
+            Bundle bundle1 = new Bundle();
+            Intent intent1 = new Intent(Filtering.this, Profile.class);
+            intent1.putExtras(bundle1);
+            startActivity(intent1);
+        });
+        animalExplore.setOnClickListener(v -> {
+            Bundle bundle1 = new Bundle();
+            Intent intent1 = new Intent(Filtering.this, Explore.class);
+            intent1.putExtras(bundle1);
+            startActivity(intent1);
+        });
+        Find1.setOnClickListener(v -> {
+            Bundle bundle1 = new Bundle();
+            Intent intent1 = new Intent(Filtering.this, FindActivity.class);
+            intent1.putExtras(bundle1);
+            startActivity(intent1);
+        });
+        HomeMain1.setOnClickListener(v -> {
+            Bundle bundle1 = new Bundle();
+            Intent intent1 = new Intent(Filtering.this, Home.class);
+            intent1.putExtras(bundle1);
+            startActivity(intent1);
+        });
+
+
         getRequest();
-
-
         b1.setOnClickListener(v -> {
             goHome();
         });
@@ -48,7 +76,7 @@ public class Filtering extends AppCompatActivity {
 
     private void goHome() {
         Bundle bundle2 = new Bundle();
-        Intent intent2 = new Intent(Filtering.this, SecondActivity.class);
+        Intent intent2 = new Intent(Filtering.this, Profile.class);
         intent2.putExtras(bundle2);
         startActivity(intent2);
     }

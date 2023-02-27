@@ -65,7 +65,7 @@
         </activity>
 
         <activity
-            android:name=".Main.SecondActivity"
+            android:name=".Main.Profile"
             android:exported="true">
 
             <intent-filter>
@@ -100,7 +100,18 @@
 
 
         <activity
-            android:name=".Main.SettingsActivity"
+            android:name=".Main.FindActivity"
+            android:exported="true">
+
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+
+        </activity>
+
+        <activity
+            android:name=".Main.Home"
             android:exported="true">
 
             <intent-filter>

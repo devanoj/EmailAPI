@@ -1,8 +1,6 @@
 package com.example.emailapi.Main;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-import android.provider.CalendarContract;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -10,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -33,7 +32,7 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 
 
-public class SettingsActivity extends AppCompatActivity {
+public class FindActivity extends AppCompatActivity {
     Button home, settings, explore, calTest;
     RecyclerView recyclerView;
     DatabaseReference dref;
@@ -42,10 +41,12 @@ public class SettingsActivity extends AppCompatActivity {
     EditText editText;
     ArrayList<Animal> arrayList;
 
+    ImageView animalExplore, Profile1, Filter1, Find1, HomeMain1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.settings_layout);
+        setContentView(R.layout.find_layout);
 
         //Buttons
         explore = findViewById(R.id.exloreButton);
@@ -58,16 +59,48 @@ public class SettingsActivity extends AppCompatActivity {
         // EditTexts
         editText = findViewById(R.id.inputVariable);
 
+        // ImageView
+        animalExplore = findViewById(R.id.ExploreAnimal);
+        Profile1 = findViewById(R.id.Profile);
+        Filter1 = findViewById(R.id.Filter);
+        Find1 = findViewById(R.id.Find);
+        HomeMain1 = findViewById(R.id.HomeMain);
+
+        Profile1.setOnClickListener(v -> {
+            Bundle bundle1 = new Bundle();
+            Intent intent1 = new Intent(FindActivity.this, Profile.class);
+            intent1.putExtras(bundle1);
+            startActivity(intent1);
+        });
+        animalExplore.setOnClickListener(v -> {
+            Bundle bundle1 = new Bundle();
+            Intent intent1 = new Intent(FindActivity.this, Explore.class);
+            intent1.putExtras(bundle1);
+            startActivity(intent1);
+        });
+        Filter1.setOnClickListener(v -> {
+            Bundle bundle1 = new Bundle();
+            Intent intent1 = new Intent(FindActivity.this, Filtering.class);
+            intent1.putExtras(bundle1);
+            startActivity(intent1);
+        });
+        HomeMain1.setOnClickListener(v -> {
+            Bundle bundle1 = new Bundle();
+            Intent intent1 = new Intent(FindActivity.this, Home.class);
+            intent1.putExtras(bundle1);
+            startActivity(intent1);
+        });
+
         explore.setOnClickListener(view1 -> {
             Bundle bundle2 = new Bundle();
-            Intent intent2 = new Intent(SettingsActivity.this, Explore.class);
+            Intent intent2 = new Intent(FindActivity.this, Explore.class);
             intent2.putExtras(bundle2);
             startActivity(intent2);
         });
 
         home.setOnClickListener(view1 -> {
             Bundle bundle2 = new Bundle();
-            Intent intent2 = new Intent(SettingsActivity.this, SecondActivity.class);
+            Intent intent2 = new Intent(FindActivity.this, Profile.class);
             intent2.putExtras(bundle2);
             startActivity(intent2);
         });
@@ -140,7 +173,7 @@ public class SettingsActivity extends AppCompatActivity {
             @Override
             public CategoryViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
                 View v = LayoutInflater.from(parent.getContext())
-                        .inflate(R.layout.layout_tasklist_lookup,parent,false);
+                        .inflate(R.layout.animal_rcv_layout,parent,false);
 
                 return new CategoryViewHolder(v, parent.getContext());
             }

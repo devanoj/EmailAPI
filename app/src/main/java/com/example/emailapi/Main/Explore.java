@@ -4,16 +4,15 @@ import android.content.ContentResolver;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.Request;
@@ -23,20 +22,14 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.emailapi.DAO.AnimalDAO;
 import com.example.emailapi.Entity.Animal;
-import com.example.emailapi.Entity.Retrieve;
-import com.example.emailapi.Image.Upload;
 import com.example.emailapi.R;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
@@ -47,6 +40,7 @@ public class Explore extends AppCompatActivity {
     Button home, settings, explore, inputAnimal, infoButton1, displayAnimalbutton, imageUP, goFilter, mButtonChooseImage, aOptions;
     EditText inputName1, inputAge1, inputBreed, inputEnergy;
     TextView data;
+    ImageView animalExplore, Profile1, Filter1, Find1, HomeMain1;
     boolean isVisible = false;
 
     StorageTask mUploadTask;
@@ -77,10 +71,40 @@ public class Explore extends AppCompatActivity {
         inputBreed = findViewById(R.id.breed);
         inputEnergy = findViewById(R.id.energyLevel);
         data = findViewById(R.id.animal_fact);
+        // ImageView
+        animalExplore = findViewById(R.id.ExploreAnimal);
+        Profile1 = findViewById(R.id.Profile);
+        Filter1 = findViewById(R.id.Filter);
+        Find1 = findViewById(R.id.Find);
+        HomeMain1 = findViewById(R.id.HomeMain);
 
         mStorageRef = FirebaseStorage.getInstance().getReference("uploads");
         mDatabaseRef = FirebaseDatabase.getInstance().getReference("uploads"); // Maybe delete later
 
+        Profile1.setOnClickListener(v -> {
+            Bundle bundle1 = new Bundle();
+            Intent intent1 = new Intent(Explore.this, Profile.class);
+            intent1.putExtras(bundle1);
+            startActivity(intent1);
+        });
+        Filter1.setOnClickListener(v -> {
+            Bundle bundle1 = new Bundle();
+            Intent intent1 = new Intent(Explore.this, Filtering.class);
+            intent1.putExtras(bundle1);
+            startActivity(intent1);
+        });
+        Find1.setOnClickListener(v -> {
+            Bundle bundle1 = new Bundle();
+            Intent intent1 = new Intent(Explore.this, FindActivity.class);
+            intent1.putExtras(bundle1);
+            startActivity(intent1);
+        });
+        HomeMain1.setOnClickListener(v -> {
+            Bundle bundle1 = new Bundle();
+            Intent intent1 = new Intent(Explore.this, Home.class);
+            intent1.putExtras(bundle1);
+            startActivity(intent1);
+        });
 
         aOptions.setOnClickListener(v0 -> {
             Bundle bundle2 = new Bundle();
@@ -99,14 +123,14 @@ public class Explore extends AppCompatActivity {
 
         home.setOnClickListener(view1 -> {
             Bundle bundle2 = new Bundle();
-            Intent intent2 = new Intent(Explore.this, SecondActivity.class);
+            Intent intent2 = new Intent(Explore.this, Profile.class);
             intent2.putExtras(bundle2);
             startActivity(intent2);
         });
 
         settings.setOnClickListener(view -> {
             Bundle bundle2 = new Bundle();
-            Intent intent2 = new Intent(Explore.this, SettingsActivity.class);
+            Intent intent2 = new Intent(Explore.this, FindActivity.class);
             intent2.putExtras(bundle2);
             startActivity(intent2);
         });
