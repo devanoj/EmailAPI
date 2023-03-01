@@ -31,7 +31,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
-
+// Still need to change profile to not show Create Button
 
 public class Profile extends AppCompatActivity {
     GoogleSignInOptions gso;
@@ -49,7 +49,7 @@ public class Profile extends AppCompatActivity {
 
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
     FirebaseUser currentUser = mAuth.getCurrentUser();
-    DatabaseReference dr;
+    DatabaseReference dr = FirebaseDatabase.getInstance().getReference("User");;
 
     boolean isEditTextVisible = false;
 
@@ -63,12 +63,6 @@ public class Profile extends AppCompatActivity {
         submit1 = findViewById(R.id.submitButton);
         deleteB = findViewById(R.id.deleteUser);
         searchAct = findViewById(R.id.Search);
-
-        animalExplore = findViewById(R.id.ExploreAnimal);
-        Profile1 = findViewById(R.id.Profile);
-        Filter1 = findViewById(R.id.Filter);
-        Find1 = findViewById(R.id.Find);
-        HomeMain1 = findViewById(R.id.HomeMain);
 
         inputName = findViewById(R.id.NameEdit);
         inputAge = findViewById(R.id.AgeEdit);
@@ -98,7 +92,8 @@ public class Profile extends AppCompatActivity {
         });
 
         infoButton.setOnClickListener(view -> {
-            isItOrg(userId);
+            isItOrg();
+            makeCreateVisible();
         });
 
         deleteB.setOnClickListener(view -> {
@@ -146,6 +141,14 @@ public class Profile extends AppCompatActivity {
     }
 
     private void sideNavMenu() {
+        animalExplore = findViewById(R.id.ExploreAnimal);
+        Profile1 = findViewById(R.id.Profile);
+        Filter1 = findViewById(R.id.Filter);
+        Find1 = findViewById(R.id.Find);
+        HomeMain1 = findViewById(R.id.HomeMain);
+
+        makeCreateVisible();
+
         animalExplore.setOnClickListener(v -> {
             Bundle bundle1 = new Bundle();
             Intent intent1 = new Intent(Profile.this, Create.class);
@@ -172,9 +175,21 @@ public class Profile extends AppCompatActivity {
         });
     }
 
-    private void isItOrg(String userId) {
-        dr = FirebaseDatabase.getInstance().getReference("User");
+    private void makeCreateVisible() {
+        dr.child(userId).child("organisation").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                boolean org = Boolean.TRUE.equals(snapshot.getValue(boolean.class));
+                if (org) {
+                    animalExplore.setVisibility(View.VISIBLE);
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {Toast.makeText(getApplicationContext(), "Organisation not found", Toast.LENGTH_SHORT).show();}
+        });
+    }
 
+    private void isItOrg() {
         dr.child(userId).child("organisation").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -235,7 +250,7 @@ public class Profile extends AppCompatActivity {
                         }
                     });
 
-            dr = FirebaseDatabase.getInstance().getReference("User");
+
             dr.child(currentUser.getUid()).removeValue()
                     .addOnCompleteListener(task -> {
                         if (task.isSuccessful()) {

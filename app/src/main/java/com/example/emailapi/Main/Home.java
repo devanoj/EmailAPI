@@ -3,6 +3,7 @@ package com.example.emailapi.Main;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -39,6 +40,11 @@ public class Home extends AppCompatActivity {
     FirebaseUser currentUser = mAuth.getCurrentUser();
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference drUser = database.getReference("User");
+    String cUser;
+    {
+        assert currentUser != null;
+        cUser = currentUser.getUid();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,10 +53,8 @@ public class Home extends AppCompatActivity {
 
         sideNavMenu();
         getWelcomeName();
-
         new GetFactsTask().execute();
     }
-
 
     private class GetFactsTask extends AsyncTask<Void, Void, String> {
         @Override
@@ -126,6 +130,8 @@ public class Home extends AppCompatActivity {
         Find1 = findViewById(R.id.Find);
         HomeMain1 = findViewById(R.id.HomeMain);
 
+        makeCreateVisible();
+
         Profile1.setOnClickListener(v -> {
             Bundle bundle1 = new Bundle();
             Intent intent1 = new Intent(Home.this, Profile.class);
@@ -149,6 +155,20 @@ public class Home extends AppCompatActivity {
             Intent intent1 = new Intent(Home.this, FindActivity.class);
             intent1.putExtras(bundle1);
             startActivity(intent1);
+        });
+    }
+
+    private void makeCreateVisible() {
+        drUser.child(cUser).child("organisation").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                boolean org = Boolean.TRUE.equals(snapshot.getValue(boolean.class));
+                if (org) {
+                    animalExplore.setVisibility(View.VISIBLE);
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {Toast.makeText(getApplicationContext(), "Organisation not found", Toast.LENGTH_SHORT).show();}
         });
     }
 }

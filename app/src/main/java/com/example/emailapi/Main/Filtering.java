@@ -2,12 +2,14 @@ package com.example.emailapi.Main;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.Request;
@@ -15,6 +17,13 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.emailapi.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -36,6 +45,17 @@ public class Filtering extends AppCompatActivity {
 
     String outputSim;
     String x;
+
+    FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    FirebaseUser currentUser = mAuth.getCurrentUser();
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference drUser = database.getReference("User");
+    String cUser;
+
+    {
+        assert currentUser != null;
+        cUser = currentUser.getUid();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -301,6 +321,8 @@ public class Filtering extends AppCompatActivity {
         Find1 = findViewById(R.id.Find);
         HomeMain1 = findViewById(R.id.HomeMain);
 
+        makeCreateVisible();
+
         Profile1.setOnClickListener(v -> {
             Bundle bundle1 = new Bundle();
             Intent intent1 = new Intent(Filtering.this, Profile.class);
@@ -324,6 +346,20 @@ public class Filtering extends AppCompatActivity {
             Intent intent1 = new Intent(Filtering.this, Home.class);
             intent1.putExtras(bundle1);
             startActivity(intent1);
+        });
+    }
+
+    private void makeCreateVisible() {
+        drUser.child(cUser).child("organisation").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                boolean org = Boolean.TRUE.equals(snapshot.getValue(boolean.class));
+                if (org) {
+                    animalExplore.setVisibility(View.VISIBLE);
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {Toast.makeText(getApplicationContext(), "Organisation not found", Toast.LENGTH_SHORT).show();}
         });
     }
 }

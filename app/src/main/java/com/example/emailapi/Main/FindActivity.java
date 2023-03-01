@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,6 +21,8 @@ import com.example.emailapi.R;
 import com.example.emailapi.ViewHolder.CategoryViewHolder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -41,6 +44,16 @@ public class FindActivity extends AppCompatActivity {
 
     ImageView animalExplore, Profile1, Filter1, Find1, HomeMain1;
 
+    FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    FirebaseUser currentUser = mAuth.getCurrentUser();
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference drUser = database.getReference("User");
+    String cUser;
+    {
+        assert currentUser != null;
+        cUser = currentUser.getUid();
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,40 +63,9 @@ public class FindActivity extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         arrayList = new ArrayList<>();
 
-        // EditTexts
         editText = findViewById(R.id.inputVariable);
 
-        // ImageView
-        animalExplore = findViewById(R.id.ExploreAnimal);
-        Profile1 = findViewById(R.id.Profile);
-        Filter1 = findViewById(R.id.Filter);
-        Find1 = findViewById(R.id.Find);
-        HomeMain1 = findViewById(R.id.HomeMain);
-
-        Profile1.setOnClickListener(v -> {
-            Bundle bundle1 = new Bundle();
-            Intent intent1 = new Intent(FindActivity.this, Profile.class);
-            intent1.putExtras(bundle1);
-            startActivity(intent1);
-        });
-        animalExplore.setOnClickListener(v -> {
-            Bundle bundle1 = new Bundle();
-            Intent intent1 = new Intent(FindActivity.this, Create.class);
-            intent1.putExtras(bundle1);
-            startActivity(intent1);
-        });
-        Filter1.setOnClickListener(v -> {
-            Bundle bundle1 = new Bundle();
-            Intent intent1 = new Intent(FindActivity.this, Filtering.class);
-            intent1.putExtras(bundle1);
-            startActivity(intent1);
-        });
-        HomeMain1.setOnClickListener(v -> {
-            Bundle bundle1 = new Bundle();
-            Intent intent1 = new Intent(FindActivity.this, Home.class);
-            intent1.putExtras(bundle1);
-            startActivity(intent1);
-        });
+        sideNavMenu();
 
 
 
@@ -171,6 +153,56 @@ public class FindActivity extends AppCompatActivity {
 
     }
 
+    private void sideNavMenu() {
+        // ImageView
+        animalExplore = findViewById(R.id.ExploreAnimal);
+        Profile1 = findViewById(R.id.Profile);
+        Filter1 = findViewById(R.id.Filter);
+        Find1 = findViewById(R.id.Find);
+        HomeMain1 = findViewById(R.id.HomeMain);
+
+        makeCreateVisible();
+
+        Profile1.setOnClickListener(v -> {
+            Bundle bundle1 = new Bundle();
+            Intent intent1 = new Intent(FindActivity.this, Profile.class);
+            intent1.putExtras(bundle1);
+            startActivity(intent1);
+        });
+        animalExplore.setOnClickListener(v -> {
+            Bundle bundle1 = new Bundle();
+            Intent intent1 = new Intent(FindActivity.this, Create.class);
+            intent1.putExtras(bundle1);
+            startActivity(intent1);
+        });
+        Filter1.setOnClickListener(v -> {
+            Bundle bundle1 = new Bundle();
+            Intent intent1 = new Intent(FindActivity.this, Filtering.class);
+            intent1.putExtras(bundle1);
+            startActivity(intent1);
+        });
+        HomeMain1.setOnClickListener(v -> {
+            Bundle bundle1 = new Bundle();
+            Intent intent1 = new Intent(FindActivity.this, Home.class);
+            intent1.putExtras(bundle1);
+            startActivity(intent1);
+        });
+    }
+
+    private void makeCreateVisible() {
+        drUser.child(cUser).child("organisation").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                boolean org = Boolean.TRUE.equals(snapshot.getValue(boolean.class));
+                if (org) {
+                    animalExplore.setVisibility(View.VISIBLE);
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(getApplicationContext(), "Organisation not found", Toast.LENGTH_SHORT).show();}
+        });
+    }
     private void searching(String editable) {
         Query query = dref.orderByChild("name")
                 .startAt(editable).endAt(editable+"\uf8ff");
