@@ -57,40 +57,12 @@ public class Create extends AppCompatActivity {
         inputBreed = findViewById(R.id.breed);
         inputEnergy = findViewById(R.id.energyLevel);
 
-        // ImageView
-        animalExplore = findViewById(R.id.ExploreAnimal);
-        Profile1 = findViewById(R.id.Profile);
-        Filter1 = findViewById(R.id.Filter);
-        Find1 = findViewById(R.id.Find);
-        HomeMain1 = findViewById(R.id.HomeMain);
-
         mStorageRef = FirebaseStorage.getInstance().getReference("uploads");
         mDatabaseRef = FirebaseDatabase.getInstance().getReference("uploads"); // Maybe delete later
 
-        Profile1.setOnClickListener(v -> {
-            Bundle bundle1 = new Bundle();
-            Intent intent1 = new Intent(Create.this, Profile.class);
-            intent1.putExtras(bundle1);
-            startActivity(intent1);
-        });
-        Filter1.setOnClickListener(v -> {
-            Bundle bundle1 = new Bundle();
-            Intent intent1 = new Intent(Create.this, Filtering.class);
-            intent1.putExtras(bundle1);
-            startActivity(intent1);
-        });
-        Find1.setOnClickListener(v -> {
-            Bundle bundle1 = new Bundle();
-            Intent intent1 = new Intent(Create.this, FindActivity.class);
-            intent1.putExtras(bundle1);
-            startActivity(intent1);
-        });
-        HomeMain1.setOnClickListener(v -> {
-            Bundle bundle1 = new Bundle();
-            Intent intent1 = new Intent(Create.this, Home.class);
-            intent1.putExtras(bundle1);
-            startActivity(intent1);
-        });
+
+
+        sideNavMenu();
 
         aOptions.setOnClickListener(v0 -> {
             Bundle bundle2 = new Bundle();
@@ -166,9 +138,40 @@ public class Create extends AppCompatActivity {
             }
 
         });
+    }
 
+    private void sideNavMenu() {
+        // ImageView
+        animalExplore = findViewById(R.id.ExploreAnimal);
+        Profile1 = findViewById(R.id.Profile);
+        Filter1 = findViewById(R.id.Filter);
+        Find1 = findViewById(R.id.Find);
+        HomeMain1 = findViewById(R.id.HomeMain);
 
-
+        Profile1.setOnClickListener(v -> {
+            Bundle bundle1 = new Bundle();
+            Intent intent1 = new Intent(Create.this, Profile.class);
+            intent1.putExtras(bundle1);
+            startActivity(intent1);
+        });
+        Filter1.setOnClickListener(v -> {
+            Bundle bundle1 = new Bundle();
+            Intent intent1 = new Intent(Create.this, Filtering.class);
+            intent1.putExtras(bundle1);
+            startActivity(intent1);
+        });
+        Find1.setOnClickListener(v -> {
+            Bundle bundle1 = new Bundle();
+            Intent intent1 = new Intent(Create.this, FindActivity.class);
+            intent1.putExtras(bundle1);
+            startActivity(intent1);
+        });
+        HomeMain1.setOnClickListener(v -> {
+            Bundle bundle1 = new Bundle();
+            Intent intent1 = new Intent(Create.this, Home.class);
+            intent1.putExtras(bundle1);
+            startActivity(intent1);
+        });
     }
 
     private void openFileChooser() {

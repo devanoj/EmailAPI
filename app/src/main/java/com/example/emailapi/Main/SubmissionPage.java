@@ -95,9 +95,6 @@ public class SubmissionPage extends AppCompatActivity {
         inputAnimal = findViewById(R.id.submitButton1);
         EndTime = findViewById(R.id.endTime);
 
-
-
-
         userPermissions();
         displayDogName();
 
@@ -337,6 +334,7 @@ public class SubmissionPage extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 rEmail = snapshot.getValue(String.class);
                 confirmAndMail(rEmail);
+                removeAnimal();
             }
 
             @Override
@@ -344,6 +342,14 @@ public class SubmissionPage extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "Email Database Error", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    private void removeAnimal() {
+        Bundle getBundle = this.getIntent().getExtras();
+        String id = getBundle.getString("Id");
+
+        dr.child(id).removeValue();
+        Toast.makeText(this, "Animal Chosen", Toast.LENGTH_SHORT).show();
     }
 
     private void confirmAndMail(String stringReceiverEmail) {
@@ -383,6 +389,7 @@ public class SubmissionPage extends AppCompatActivity {
                 try {Transport.send(mimeMessage);} catch (MessagingException e) {e.printStackTrace();}
             });
             thread.start();
+
 
             Toast.makeText(getApplicationContext(), "Confirmation Email sent", Toast.LENGTH_SHORT).show();
         } catch (MessagingException e) {e.printStackTrace();}
