@@ -17,6 +17,8 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.Observer;
 
 import com.example.emailapi.Entity.Animal;
 import com.example.emailapi.R;
@@ -32,6 +34,7 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
 
 import java.util.Properties;
+import java.util.concurrent.CompletableFuture;
 
 import javax.mail.Authenticator;
 import javax.mail.Message;
@@ -44,8 +47,8 @@ import javax.mail.internet.MimeMessage;
 
 
 public class SubmissionPage extends AppCompatActivity {
-    TextView nameDog, display, displaytime, inputName1, inputAge1, inputBreed, inputEnergy, meeting1;
-    Button dateButton, cMail, deleteAnimal, updateAnimal, mButtonChooseImage, backToHome, inputAnimal;
+    TextView nameDog, display, displaytime, inputName1, inputAge1, inputBreed, inputEnergy, meeting1, displayDateEnd;
+    Button dateButton, cMail, deleteAnimal, updateAnimal, mButtonChooseImage, backToHome, inputAnimal, EndTime;
 
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
     FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -67,6 +70,7 @@ public class SubmissionPage extends AppCompatActivity {
         cUser = currentUser.getUid();
     }
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,6 +84,7 @@ public class SubmissionPage extends AppCompatActivity {
         inputBreed = findViewById(R.id.breed);
         inputEnergy = findViewById(R.id.energyLevel);
         meeting1 = findViewById(R.id.Meeting);
+        displayDateEnd = findViewById(R.id.displayEndDate);
 
         dateButton = findViewById(R.id.button);
         cMail = findViewById(R.id.mail);
@@ -88,13 +93,16 @@ public class SubmissionPage extends AppCompatActivity {
         backToHome = findViewById(R.id.goExplore);
         mButtonChooseImage = findViewById(R.id.button_choose_image);
         inputAnimal = findViewById(R.id.submitButton1);
+        EndTime = findViewById(R.id.endTime);
+
+
 
 
         userPermissions();
         displayDogName();
 
         backToHome.setOnClickListener(v -> {
-            goBackToHome();
+            goBackToFindActivity();
         });
 
         deleteAnimal.setOnClickListener(v -> {
@@ -105,9 +113,11 @@ public class SubmissionPage extends AppCompatActivity {
             showUpdate();
         });
 
+
         dateButton.setOnClickListener(view -> {
             openDatePickerDialog();
             openTimePickerDialog();
+            openDateFinish();
         });
 
         cMail.setOnClickListener(v1 -> {
@@ -115,6 +125,14 @@ public class SubmissionPage extends AppCompatActivity {
             goBackToHome();
         });
 
+    }
+
+
+    private void goBackToFindActivity() {
+        Bundle bundle2 = new Bundle();
+        Intent intent2 = new Intent(SubmissionPage.this, FindActivity.class);
+        intent2.putExtras(bundle2);
+        startActivity(intent2);
     }
 
     private void confirmDialog() {
@@ -168,6 +186,7 @@ public class SubmissionPage extends AppCompatActivity {
         dateButton.setVisibility(View.INVISIBLE);
         cMail.setVisibility(View.INVISIBLE);
         meeting1.setVisibility(View.INVISIBLE);
+        EndTime.setVisibility(View.INVISIBLE);
     }
 
     private void goBackToHome() {
@@ -303,8 +322,6 @@ public class SubmissionPage extends AppCompatActivity {
         String id = getBundle.getString("Id");
         String idUser = getBundle.getString("idFromUser");
 
-
-
         if (cUser.equals(idUser)) {
             dr.child(id).removeValue()
                     .addOnSuccessListener(aVoid -> Toast.makeText(getApplicationContext(), "Animal deleted successfully", Toast.LENGTH_SHORT).show())
@@ -315,8 +332,6 @@ public class SubmissionPage extends AppCompatActivity {
     }
 
     private void getMailFromFirebase() {
-
-        
         drUser.child(cUser).child("email").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -346,7 +361,7 @@ public class SubmissionPage extends AppCompatActivity {
             String stringHost = "smtp.gmail.com";
             Properties properties = System.getProperties();
             properties.put("mail.smtp.host", stringHost);
-            properties.put("mail.smtp.port", "465");
+            properties.put("mail.smtp.port", "465"); // Also tried 587
             properties.put("mail.smtp.ssl.enable", "true");
             properties.put("mail.smtp.auth", "true");
 
@@ -384,5 +399,15 @@ public class SubmissionPage extends AppCompatActivity {
             display.setText(year + "."+ month + "."+ day);
         }, 2023, 1, 20);
         datePickerDialog.show();
+    }
+
+    private void openDateFinish() {
+        EndTime.setOnClickListener(v -> {
+            DatePickerDialog datePickerDialog = new DatePickerDialog(this, (datePicker, year, month, day) -> {
+                month = month + 1; // Weird bug where where begining of month is 0 so add 1
+                displayDateEnd.setText(year + "."+ month + "."+ day);
+            }, 2023, 1, 20);
+            datePickerDialog.show();
+        });
     }
 }

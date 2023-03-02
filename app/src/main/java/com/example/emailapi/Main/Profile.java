@@ -39,7 +39,7 @@ public class Profile extends AppCompatActivity {
     TextView name;
     Button button1;
 
-    Button SignOut1, infoButton, submit1, deleteB, searchAct;
+    Button SignOut1, infoButton, submit1, deleteB;
     EditText inputName, inputAge, inputFT, inputLS;
     TextView viewEmail;
     ImageView animalExplore, Profile1, Filter1, Find1, HomeMain1;
@@ -62,7 +62,7 @@ public class Profile extends AppCompatActivity {
         infoButton = findViewById(R.id.addInfoButton);
         submit1 = findViewById(R.id.submitButton);
         deleteB = findViewById(R.id.deleteUser);
-        searchAct = findViewById(R.id.Search);
+
 
         inputName = findViewById(R.id.NameEdit);
         inputAge = findViewById(R.id.AgeEdit);
@@ -75,21 +75,7 @@ public class Profile extends AppCompatActivity {
         }
 
         sideNavMenu();
-
-        searchAct.setOnClickListener(v -> {
-            Bundle bundle1 = new Bundle();
-            Intent intent1 = new Intent(Profile.this, Filtering.class);
-            intent1.putExtras(bundle1);
-            startActivity(intent1);
-        });
-
-        SignOut1.setOnClickListener(view -> {
-            Toast.makeText(Profile.this, "User signed out", Toast.LENGTH_SHORT).show();
-            Bundle bundle1 = new Bundle();
-            Intent intent1 = new Intent(Profile.this, LogIn.class);
-            intent1.putExtras(bundle1);
-            startActivity(intent1);
-        });
+        signOutFunction();
 
         infoButton.setOnClickListener(view -> {
             isItOrg();
@@ -98,6 +84,16 @@ public class Profile extends AppCompatActivity {
 
         deleteB.setOnClickListener(view -> {
             confirmDialog();
+        });
+    }
+
+    private void signOutFunction() {
+        SignOut1.setOnClickListener(view -> {
+            Toast.makeText(Profile.this, "User signed out", Toast.LENGTH_SHORT).show();
+            Bundle bundle1 = new Bundle();
+            Intent intent1 = new Intent(Profile.this, LogIn.class);
+            intent1.putExtras(bundle1);
+            startActivity(intent1);
         });
     }
 

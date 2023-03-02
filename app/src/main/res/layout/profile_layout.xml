@@ -27,21 +27,12 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <Button
-        android:id="@+id/Search"
-        android:layout_width="410dp"
-        android:layout_height="50dp"
-        android:layout_marginBottom="680dp"
-        android:text="Search Animal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/SignOut"
         android:layout_width="410dp"
         android:layout_height="50dp"
-        android:layout_marginBottom="640dp"
+        android:layout_marginBottom="678dp"
         android:text="Sign Out"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
