@@ -33,37 +33,36 @@ public class LogIn extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_layout);
 
-        bLogin = findViewById(R.id.loginbtn);
+
         email1 = findViewById(R.id.username);
         password1 = findViewById(R.id.password);
-        SignUp = findViewById(R.id.SignUp);
+
 
         gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
         gsc = GoogleSignIn.getClient(this,gso);
         mAuth = FirebaseAuth.getInstance();
 
+        buttonClick();
+    }
 
-        SignUp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Bundle bundle1 = new Bundle();
-                Intent intent1 = new Intent(LogIn.this, SignUp.class);
-                intent1.putExtras(bundle1);
-                startActivity(intent1);
-                Toast.makeText(LogIn.this, "Register Page", Toast.LENGTH_SHORT).show();
-            }
+    private void buttonClick() {
+        SignUp = findViewById(R.id.SignUp);
+        bLogin = findViewById(R.id.loginbtn);
+
+
+        SignUp.setOnClickListener(view -> {
+            Bundle bundle1 = new Bundle();
+            Intent intent1 = new Intent(LogIn.this, SignUp.class);
+            intent1.putExtras(bundle1);
+            startActivity(intent1);
+            Toast.makeText(LogIn.this, "Register Page", Toast.LENGTH_SHORT).show();
         });
 
-        bLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick (View view){
-                String email = email1.getText().toString();
-                String password = password1.getText().toString();
-                loginUser(email, password);
-            }
+        bLogin.setOnClickListener(view -> {
+            String email = email1.getText().toString();
+            String password = password1.getText().toString();
+            loginUser(email, password);
         });
-
-
     }
 
     void signIn(){

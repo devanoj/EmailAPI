@@ -21,7 +21,7 @@ public class SignUp extends AppCompatActivity {
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
     FirebaseUser mUser;
     Button createAcc, goBack;
-    EditText email2, password2, pwRetype, Name, dateOfBirth;
+    EditText email2, password2, pwRetype, Name, dateOfBirth, phoneNo, eircode;
     CheckBox myCheckbox;
     Boolean organisation=false;
 
@@ -39,6 +39,8 @@ public class SignUp extends AppCompatActivity {
         Name = findViewById(R.id.Name);
         dateOfBirth = findViewById(R.id.DateOfBirth);
         myCheckbox = findViewById(R.id.my_checkbox);
+        phoneNo = findViewById(R.id.phoneNo);
+        eircode = findViewById(R.id.eircode);
 
         myCheckbox.setOnCheckedChangeListener((buttonView, isChecked) -> {
             organisation = isChecked;
@@ -55,6 +57,8 @@ public class SignUp extends AppCompatActivity {
             String password = password2.getText().toString();
             String name1 = Name.getText().toString();
             String dateOfBirth1 = dateOfBirth.getText().toString();
+            String phoneNo1 = phoneNo.getText().toString();
+            String eircode1 = eircode.getText().toString();
 
             if (organisation) {
                 // If the user is an organisation, set dateOfBirth1 to an empty string
@@ -69,7 +73,7 @@ public class SignUp extends AppCompatActivity {
                 return;
             }
 
-            registerUser(email, password, name1, dateOfBirth1, organisation);
+            registerUser(email, password, name1, dateOfBirth1, organisation, phoneNo1, eircode1);
         });
 
         /*
@@ -86,7 +90,7 @@ public class SignUp extends AppCompatActivity {
         });
     }
 
-    private void registerUser(String email, String password, String name1, String dateOfBirth1, Boolean organisation) {
+    private void registerUser(String email, String password, String name1, String dateOfBirth1, Boolean organisation, String phoneNo1, String eircode1) {
         String passwordRetype = pwRetype.getText().toString();
 
         // Check if password2 and pwRetype are the same
@@ -105,7 +109,7 @@ public class SignUp extends AppCompatActivity {
                         String uid = mUser.getUid();
 
 
-                        User person1 = new User(name1, dateOfBirth1, "lifestyle", "freetime", email, uid, organisation);
+                        User person1 = new User(name1, dateOfBirth1, phoneNo1, eircode1, email, uid, organisation);
                         UserDAO uDAO = new UserDAO(person1, uid);
 
                         Intent intent = new Intent(getApplicationContext(), LogIn.class);
