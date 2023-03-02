@@ -11,6 +11,7 @@ public class Animal {
     private String email;
     private String mImageUrl;
     private String uid;
+    private String from;
 
     public Animal() {
         this.animalID="";
@@ -21,11 +22,12 @@ public class Animal {
         this.email="";
         this.mImageUrl="";
         this.uid="";
+        this.from="";
     }
 
 
 
-    public Animal(String uid, String animalID, String name, String age, String breed, String energyLevel, String email, String mImageUrl) {
+    public Animal(String uid, String animalID, String name, String age, String breed, String energyLevel, String email, String mImageUrl, String from) {
         this.animalID=animalID;
         this.name=name;
         this.age=age;
@@ -34,6 +36,15 @@ public class Animal {
         this.email=email;
         this.mImageUrl=mImageUrl;
         this.uid=uid;
+        this.from=from;
+    }
+
+    public String getFrom() {
+        return from;
+    }
+
+    public void setFrom(String from) {
+        this.from = from;
     }
 
     public String getUsid() {

@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.emailapi.DAO.AnimalDAO;
@@ -20,8 +21,11 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
@@ -33,6 +37,11 @@ public class Create extends AppCompatActivity {
     ImageView animalExplore, Profile1, Filter1, Find1, HomeMain1;
     boolean isVisible = false;
 
+    FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    FirebaseUser currentUser = mAuth.getCurrentUser();
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference drUser = database.getReference("User");
+
     StorageTask mUploadTask;
     Uri mImageUri;
     StorageReference mStorageRef;
@@ -41,6 +50,8 @@ public class Create extends AppCompatActivity {
     private static final int AMNT_PICK_IMAGE = 1;
     String email1;
     String uid;
+    String from;
+    String fromValue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +62,7 @@ public class Create extends AppCompatActivity {
         infoButton1 = findViewById(R.id.addInfoButton1);
         mButtonChooseImage = findViewById(R.id.button_choose_image);
         aOptions = findViewById(R.id.AnimalOptions);
-        // EditText
+
         inputName1 = findViewById(R.id.NameEdit1);
         inputAge1 = findViewById(R.id.AgeEdit1);
         inputBreed = findViewById(R.id.breed);
@@ -60,9 +71,9 @@ public class Create extends AppCompatActivity {
         mStorageRef = FirebaseStorage.getInstance().getReference("uploads");
         mDatabaseRef = FirebaseDatabase.getInstance().getReference("uploads"); // Maybe delete later
 
-
-
         sideNavMenu();
+        setVisibilityForInfoBttn();
+        inputDog();
 
         aOptions.setOnClickListener(v0 -> {
             Bundle bundle2 = new Bundle();
@@ -73,8 +84,61 @@ public class Create extends AppCompatActivity {
 
         mButtonChooseImage.setOnClickListener(v -> openFileChooser());
 
+    }
 
+    private void inputDog() {
 
+        if (currentUser != null) {
+            email1 = currentUser.getEmail();
+            uid = currentUser.getUid();
+        }
+
+        //from = getFrom();
+
+        drUser.child(uid).child("name").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                fromValue = snapshot.getValue(String.class);;
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {Toast.makeText(getApplicationContext(), "Organisation not found", Toast.LENGTH_SHORT).show();}
+        });
+
+        inputAnimal.setOnClickListener(view -> {
+            if (mImageUri != null) {
+
+                StorageReference fileReference = mStorageRef.child(System.currentTimeMillis() + "." + getFileExtension(mImageUri));
+
+                mUploadTask = fileReference.putFile(mImageUri)
+                        .addOnSuccessListener(taskSnapshot -> {
+                            String id = null;
+
+                            taskSnapshot.getStorage().getDownloadUrl().addOnSuccessListener(uri -> {
+                                String imageUrl = uri.toString();
+
+                                Animal pet1 = new Animal(uid, id, inputName1.getText().toString(), inputAge1.getText().toString(), inputBreed.getText().toString(), inputEnergy.getText().toString(),
+                                        email1, imageUrl, fromValue);
+                                AnimalDAO aDAO = new AnimalDAO(pet1);
+                                Toast.makeText(Create.this, "Entered Data", Toast.LENGTH_SHORT).show();
+                            });
+                        })
+                        .addOnFailureListener(e -> Toast.makeText(Create.this, e.getMessage(), Toast.LENGTH_SHORT).show());
+            } else {
+                Toast.makeText(Create.this, "No file selected", Toast.LENGTH_SHORT).show();
+            }
+
+        });
+    }
+    /**
+    private String getFrom() {
+
+        if (currentUser != null) {
+            uid = currentUser.getUid();
+        }
+        return fromValue;
+    } **/
+
+    private void setVisibilityForInfoBttn() {
         infoButton1.setOnClickListener(view -> {
             if (isVisible) {
                 inputName1.setVisibility(View.INVISIBLE);
@@ -93,50 +157,6 @@ public class Create extends AppCompatActivity {
                 mButtonChooseImage.setVisibility(View.VISIBLE);
                 isVisible = true;
             }
-        });
-
-        FirebaseAuth mAuth = FirebaseAuth.getInstance();
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        if (currentUser != null) {
-            email1 = currentUser.getEmail();
-            uid = currentUser.getUid();
-        }
-
-        inputAnimal.setOnClickListener(view -> {
-            if (mImageUri != null) {
-
-                StorageReference fileReference = mStorageRef.child(System.currentTimeMillis() + "." + getFileExtension(mImageUri));
-
-                mUploadTask = fileReference.putFile(mImageUri)
-                        .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                            @Override
-                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                                String id = null;
-
-
-                                taskSnapshot.getStorage().getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                                    @Override
-                                    public void onSuccess(Uri uri) {
-                                        String imageUrl = uri.toString();
-
-                                        Animal pet1 = new Animal(uid, id, inputName1.getText().toString(), inputAge1.getText().toString(), inputBreed.getText().toString(), inputEnergy.getText().toString(),
-                                                email1, imageUrl);
-                                        AnimalDAO aDAO = new AnimalDAO(pet1);
-                                        Toast.makeText(Create.this, "Entered Data", Toast.LENGTH_SHORT).show();
-                                    }
-                                });
-                            }
-                        })
-                        .addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(Exception e) {
-                                Toast.makeText(Create.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                            }
-                        });
-            } else {
-                Toast.makeText(Create.this, "No file selected", Toast.LENGTH_SHORT).show();
-            }
-
         });
     }
 

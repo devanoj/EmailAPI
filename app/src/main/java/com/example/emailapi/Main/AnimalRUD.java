@@ -82,6 +82,7 @@ public class AnimalRUD extends AppCompatActivity {
                 holder.dead.setText(model.getBreed());
                 holder.desc.setText(model.getEnergyLevel());
                 holder.stat.setText(model.getName());
+                holder.fromOrg.setText(model.getFrom());
                 holder.id.setText(model.getId());
                 holder.idfromUser.setText(model.getUsid());
 

@@ -16,7 +16,7 @@ import com.example.emailapi.Main.SubmissionPage;
 import com.example.emailapi.R;
 
 public class CategoryViewHolder extends RecyclerView.ViewHolder {
-    public TextView cat, dead, desc, stat, id, idfromUser;
+    public TextView cat, dead, desc, stat, id, idfromUser, fromOrg;
     public Button select;
     public ImageView pictureDog;
     private Context context;
@@ -31,6 +31,7 @@ public class CategoryViewHolder extends RecyclerView.ViewHolder {
         stat = itemView.findViewById(R.id.statusEditTV1);
         id = itemView.findViewById(R.id.idAnimal);
         idfromUser = itemView.findViewById(R.id.idUser);
+        fromOrg = itemView.findViewById(R.id.fromEditTV1);
 
         pictureDog = itemView.findViewById(R.id.pictureOfDog);
         select = itemView.findViewById(R.id.selectAnimal);
