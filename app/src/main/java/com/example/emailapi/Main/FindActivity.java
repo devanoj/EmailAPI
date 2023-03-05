@@ -208,10 +208,11 @@ public class FindActivity extends AppCompatActivity {
         Query query = dref.orderByChild("name")
                 .startAt(editable).endAt(editable+"\uf8ff");
 
-        Query query1 = dref.orderByChild("energyLevel")
+        Query query1 = dref.orderByChild("from")
                 .startAt(editable).endAt(editable+"\uf8ff");
 
-        dref.addValueEventListener(new ValueEventListener() {
+
+        query1.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(snapshot.hasChildren()) {
@@ -232,8 +233,8 @@ public class FindActivity extends AppCompatActivity {
 
             }
         });
-        /*
-        query1.addValueEventListener(new ValueEventListener() {
+
+        query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(snapshot.hasChildren()) {
@@ -254,7 +255,7 @@ public class FindActivity extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
-        }); */
+        });
     }
 
     @Override
