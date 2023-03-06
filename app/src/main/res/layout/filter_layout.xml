@@ -36,6 +36,9 @@
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
         android:text="Recommendation"
+        android:textAlignment="center"
+        android:textColor=" #FFFFFF"
+        android:fontFamily="@font/aref_ruqaa"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -44,9 +47,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="302dp"
-        android:layout_marginStart="20dp"
         android:layout_marginEnd="80dp"
+        android:fontFamily="@font/aref_ruqaa"
         android:text="Recommendation"
+        android:textAlignment="center"
+        android:textColor=" #FFFFFF"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

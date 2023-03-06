@@ -12,7 +12,8 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="270dp"
         android:layout_marginBottom="750dp"
-        android:fontFamily="@font/jacques_francois"
+        android:textColor="#FFFFFF"
+        android:fontFamily="@font/aref_ruqaa"
         android:text="Welcome"
         android:textSize="25sp"
         android:textStyle="bold"
@@ -25,7 +26,8 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="120dp"
         android:layout_marginBottom="750dp"
-        android:fontFamily="@font/jacques_francois"
+        android:textColor="#FFFFFF"
+        android:fontFamily="@font/aref_ruqaa"
         android:textSize="25sp"
         android:textStyle="italic"
         android:text="---"
@@ -34,18 +36,17 @@
 
     <TextView
         android:id="@+id/dogfact"
-        android:textSize="18sp"
+        android:textSize="25sp"
         android:textAlignment="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginEnd="70dp"
         android:layout_marginStart="70dp"
-        android:layout_marginTop="260dp"
-        android:fontFamily="@font/jacques_francois"
+        android:layout_marginTop="160dp"
+        android:textColor="#FFFFFF"
+        android:fontFamily="@font/aref_ruqaa"
         android:text="---------------- ------ ---------------- --"
-
         android:layout_centerInParent="true"
-        android:background="@drawable/round"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
