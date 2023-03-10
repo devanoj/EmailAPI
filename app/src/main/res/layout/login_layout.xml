@@ -83,5 +83,14 @@
         android:layout_marginBottom="40dp"
         android:text="SignUp" />
 
-
+    <TextView
+        android:id="@+id/forgotPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/SignUp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="25dp"
+        android:text="forgot password"
+        />
 </RelativeLayout>

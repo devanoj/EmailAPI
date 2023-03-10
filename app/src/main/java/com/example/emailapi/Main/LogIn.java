@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.emailapi.R;
@@ -25,6 +26,7 @@ import com.google.firebase.auth.FirebaseAuthInvalidUserException;
 
 public class LogIn extends AppCompatActivity {
     EditText email1, password1;
+    TextView forgotPswd;
     Button bLogin, SignUp;
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
@@ -35,12 +37,21 @@ public class LogIn extends AppCompatActivity {
         email1 = findViewById(R.id.username);
         password1 = findViewById(R.id.password);
 
-        buttonClick();
+
+        click();
     }
 
-    private void buttonClick() {
+    private void click() {
         SignUp = findViewById(R.id.SignUp);
         bLogin = findViewById(R.id.loginbtn);
+        forgotPswd = findViewById(R.id.forgotPassword);
+
+        forgotPswd.setOnClickListener(v -> {
+            Bundle bundle1 = new Bundle();
+            Intent intent1 = new Intent(LogIn.this, ForgotPassword.class);
+            intent1.putExtras(bundle1);
+            startActivity(intent1);
+        });
 
 
         SignUp.setOnClickListener(view -> {
