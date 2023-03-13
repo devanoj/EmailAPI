@@ -37,7 +37,6 @@ public class LogIn extends AppCompatActivity {
         email1 = findViewById(R.id.username);
         password1 = findViewById(R.id.password);
 
-
         click();
     }
 
@@ -47,7 +46,9 @@ public class LogIn extends AppCompatActivity {
         forgotPswd = findViewById(R.id.forgotPassword);
 
         forgotPswd.setOnClickListener(v -> {
+            String email = email1.getText().toString();
             Bundle bundle1 = new Bundle();
+            bundle1.putString("email", email);
             Intent intent1 = new Intent(LogIn.this, ForgotPassword.class);
             intent1.putExtras(bundle1);
             startActivity(intent1);
