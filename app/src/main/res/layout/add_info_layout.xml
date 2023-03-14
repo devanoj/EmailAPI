@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#9a183d">
+
+
+    <EditText
+        android:id="@+id/leftAlone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginTop="30dp"
+        android:ems="10"
+        android:hint="Daily hours dog will be alone"
+        android:inputType="textEmailAddress"
+        android:minHeight="48dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:padding="20dp"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:background="#30ffffff"/>
+
+    <EditText
+        android:id="@+id/pType"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginTop="7dp"
+        android:ems="10"
+        android:hint="Property type"
+        android:inputType="textPassword"
+        android:minHeight="48dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/leftAlone"
+        android:padding="20dp"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:background="#30ffffff"/>
+
+    <CheckBox
+        android:id="@+id/my_checkbox1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:text="Have you or your immediate family, ever been convicted of abusing or being cruel to an animal"
+        android:layout_marginTop="7dp"
+        app:layout_constraintStart_toStartOf="parent"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:background="#30ffffff"
+        app:layout_constraintTop_toBottomOf="@+id/pType" />
+
+    <CheckBox
+        android:id="@+id/my_checkbox2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:text="Are you a driver and willing to use your own car to transport a dog if required?"
+        android:layout_marginTop="7dp"
+        app:layout_constraintStart_toStartOf="parent"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:background="#30ffffff"
+        app:layout_constraintTop_toBottomOf="@+id/my_checkbox1" />
+
+    <Spinner
+        android:id="@+id/my_spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="7dp"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/my_checkbox2" />
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

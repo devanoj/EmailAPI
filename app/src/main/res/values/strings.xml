@@ -6,4 +6,10 @@
     <string name="retype_password">Retype Password</string>
     <string name="enter_password">Enter Password</string>
     <string name="enter_email">Enter Email</string>
+
+    <string-array name="my_array">
+        <item>Item 1</item>
+        <item>Item 2</item>
+        <item>Item 3</item>
+    </string-array>
 </resources>

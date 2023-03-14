@@ -51,43 +51,43 @@ public class SignUp extends AppCompatActivity {
             }
         });
 
-
         createAcc.setOnClickListener(view2 -> {
-            String email = email2.getText().toString();
-            String password = password2.getText().toString();
-            String name1 = Name.getText().toString();
-            String dateOfBirth1 = dateOfBirth.getText().toString();
-            String phoneNo1 = phoneNo.getText().toString();
-            String eircode1 = eircode.getText().toString();
-
-            if (organisation) {
-                // If the user is an organisation, set dateOfBirth1 to an empty string
-                dateOfBirth1 = "";
-            } else if (dateOfBirth1 == null || dateOfBirth1.isEmpty()) {
-                // If the user is not an organisation and dateOfBirth1 is null or empty, show an error message
-                Toast.makeText(this, "Date of birth is required.", Toast.LENGTH_SHORT).show();
-                return;
-            } else if (!dateOfBirth1.matches("(0[1-9]|1[0-2])/(0[1-9]|[1-2][0-9]|3[01])/\\d{4}")) {
-                // If dateOfBirth1 is not null or empty, but it's not in the correct format, show an error message
-                Toast.makeText(getApplicationContext(), "Date format should be in number XX/XX/XXXX", Toast.LENGTH_SHORT).show();
-                return;
-            }
-
-            registerUser(email, password, name1, dateOfBirth1, organisation, phoneNo1, eircode1);
+            createAccount();
         });
-
-        /*
-                String id = null;
-                User person1 = new User(inputName.getText().toString(), inputAge.getText().toString(), inputLS.getText().toString(), inputFT.getText().toString(), email1, id);
-                UserDAO uDAO = new UserDAO(person1);
-                Toast.makeText(SecondActivity.this, "Entered Data", Toast.LENGTH_SHORT).show();
-         */
 
         goBack.setOnClickListener(view -> {
-            Toast.makeText(SignUp.this, "Login Page", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(getApplicationContext(), LogIn.class);
-            startActivity(intent);
+            goToLogIn();
         });
+    }
+
+    private void goToLogIn() {
+        Toast.makeText(SignUp.this, "Login Page", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(getApplicationContext(), LogIn.class);
+        startActivity(intent);
+    }
+
+    private void createAccount() {
+        String email = email2.getText().toString();
+        String password = password2.getText().toString();
+        String name1 = Name.getText().toString();
+        String dateOfBirth1 = dateOfBirth.getText().toString();
+        String phoneNo1 = phoneNo.getText().toString();
+        String eircode1 = eircode.getText().toString();
+
+        if (organisation) {
+            // If the user is an organisation, set dateOfBirth1 to an empty string
+            dateOfBirth1 = "";
+        } else if (dateOfBirth1 == null || dateOfBirth1.isEmpty()) {
+            // If the user is not an organisation and dateOfBirth1 is null or empty, show an error message
+            Toast.makeText(this, "Date of birth is required.", Toast.LENGTH_SHORT).show();
+            return;
+        } else if (!dateOfBirth1.matches("(0[1-9]|1[0-2])/(0[1-9]|[1-2][0-9]|3[01])/\\d{4}")) {
+            // If dateOfBirth1 is not null or empty, but it's not in the correct format, show an error message
+            Toast.makeText(getApplicationContext(), "Date format should be in number XX/XX/XXXX", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        registerUser(email, password, name1, dateOfBirth1, organisation, phoneNo1, eircode1);
     }
 
     private void registerUser(String email, String password, String name1, String dateOfBirth1, Boolean organisation, String phoneNo1, String eircode1) {
@@ -112,7 +112,7 @@ public class SignUp extends AppCompatActivity {
                         User person1 = new User(name1, dateOfBirth1, phoneNo1, eircode1, email, uid, organisation);
                         UserDAO uDAO = new UserDAO(person1, uid);
 
-                        Intent intent = new Intent(getApplicationContext(), LogIn.class);
+                        Intent intent = new Intent(getApplicationContext(), AddInfo.class);
                         startActivity(intent);
                     } else {
 
