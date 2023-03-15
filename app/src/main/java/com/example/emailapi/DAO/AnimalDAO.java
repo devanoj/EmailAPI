@@ -16,14 +16,7 @@ public class AnimalDAO {
         pet1.setId(animalId); // set the ID in the animal object
         databaseReference.child(animalId).setValue(pet1);
 
-        //databaseReference.child(pet1.getName()).setValue(pet1);
-        //databaseReference.push();
+
 
     }
-
-    /*
-    public Task<Void> add(Animal pet1) {
-        return databaseReference.push().setValue(pet1);
-    }
-    */
 }

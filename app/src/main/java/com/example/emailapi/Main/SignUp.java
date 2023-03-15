@@ -112,7 +112,7 @@ public class SignUp extends AppCompatActivity {
                         User person1 = new User(name1, dateOfBirth1, phoneNo1, eircode1, email, uid, organisation);
                         UserDAO uDAO = new UserDAO(person1, uid);
 
-                        Intent intent = new Intent(getApplicationContext(), AddInfo.class);
+                        Intent intent = new Intent(getApplicationContext(), AddSafetyInfo.class);
                         startActivity(intent);
                     } else {
 
