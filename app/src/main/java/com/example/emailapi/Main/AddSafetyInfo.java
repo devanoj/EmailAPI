@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
 
@@ -23,6 +24,9 @@ public class AddSafetyInfo extends AppCompatActivity {
     Button nextPage;
     Spinner spinnerAdult, gardenSpinner;
     EditText leftAlone, pType;
+    CheckBox criminal, car;
+    Boolean criminal1 = false; //boolean is more memory efficient than Boolean, however Boolean can be null
+    Boolean car1 = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,9 +38,22 @@ public class AddSafetyInfo extends AppCompatActivity {
         leftAlone = findViewById(R.id.leftAlone);
         pType = findViewById(R.id.pType);
 
-
+        handleCheckBox();
         handleSpinner();
         addToFirebase();
+    }
+
+    private void handleCheckBox() {
+        criminal = findViewById(R.id.my_checkbox1);
+        car = findViewById(R.id.car_checkbox);
+
+        criminal.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            criminal1 = isChecked;
+        });
+
+        car.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            car1 = isChecked;
+        });
     }
 
     private void addToFirebase() {
@@ -52,7 +69,7 @@ public class AddSafetyInfo extends AppCompatActivity {
             String safetyId = null;
 
 
-            Safety add1 = new Safety(safetyId, ussid, adult, garden, hrsAlone, property);
+            Safety add1 = new Safety(safetyId, car1, criminal1, ussid, adult, garden, hrsAlone, property);
             SafetyDAO sDAO = new SafetyDAO(add1);
             goToLogin();
 

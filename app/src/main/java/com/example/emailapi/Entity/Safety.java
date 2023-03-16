@@ -4,6 +4,8 @@ import androidx.annotation.Nullable;
 
 public class Safety {
     private String SafetyId;
+    private Boolean car1;
+    private Boolean criminal1;
     private String adult;
     private String garden;
     private String hoursAlone;
@@ -12,6 +14,8 @@ public class Safety {
 
     public Safety() {
         this.SafetyId="";
+        this.car1=false;
+        this.criminal1=false;
         this.adult="";
         this.garden="";
         this.hoursAlone="";
@@ -19,13 +23,31 @@ public class Safety {
         this.ussid="";
     }
 
-    public Safety(String SafetyId, String ussid, String adult, String garden, String hoursAlone, String property) {
+    public Safety(String SafetyId, Boolean car1, Boolean criminal1, String ussid, String adult, String garden, String hoursAlone, String property) {
         this.SafetyId=SafetyId;
+        this.car1=car1;
+        this.criminal1=criminal1;
         this.adult=adult;
         this.garden=garden;
         this.hoursAlone=hoursAlone;
         this.property=property;
         this.ussid=ussid;
+    }
+
+    public Boolean getCar1() {
+        return car1;
+    }
+
+    public void setCar1(Boolean car1) {
+        this.car1 = car1;
+    }
+
+    public Boolean getCriminal1() {
+        return criminal1;
+    }
+
+    public void setCriminal1(Boolean criminal1) {
+        this.criminal1 = criminal1;
     }
 
     public String getSafetyId() {

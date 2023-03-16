@@ -57,7 +57,7 @@
         app:layout_constraintTop_toBottomOf="@+id/pType" />
 
     <CheckBox
-        android:id="@+id/my_checkbox2"
+        android:id="@+id/car_checkbox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
@@ -79,7 +79,7 @@
         android:layout_marginStart="296dp"
         android:layout_marginTop="24dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/my_checkbox2" />
+        app:layout_constraintTop_toBottomOf="@+id/car_checkbox" />
 
     <TextView
         android:id="@+id/adult"
@@ -95,7 +95,7 @@
         android:textColor="@color/white"
         android:textColorHint="@color/white"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/my_checkbox2" />
+        app:layout_constraintTop_toBottomOf="@+id/car_checkbox" />
 
     <TextView
         android:id="@+id/garden"
