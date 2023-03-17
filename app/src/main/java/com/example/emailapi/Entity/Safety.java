@@ -34,19 +34,19 @@ public class Safety {
         this.ussid=ussid;
     }
 
-    public Boolean getCar1() {
+    public Boolean getCar() {
         return car1;
     }
 
-    public void setCar1(Boolean car1) {
+    public void setCar(Boolean car1) {
         this.car1 = car1;
     }
 
-    public Boolean getCriminal1() {
+    public Boolean getCriminal() {
         return criminal1;
     }
 
-    public void setCriminal1(Boolean criminal1) {
+    public void setCriminal(Boolean criminal1) {
         this.criminal1 = criminal1;
     }
 
