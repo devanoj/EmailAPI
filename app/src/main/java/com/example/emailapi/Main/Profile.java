@@ -34,14 +34,9 @@ import com.google.firebase.database.ValueEventListener;
 // Still need to change profile to not show Create Button
 
 public class Profile extends AppCompatActivity {
-    GoogleSignInOptions gso;
-    GoogleSignInClient gsc;
-    TextView name;
-    Button button1;
 
-    Button SignOut1, infoButton, submit1, deleteB;
+    Button SignOut1, infoButton, submit1, deleteB, updateSafety;
     EditText inputName, inputAge, inputFT, inputLS;
-    TextView viewEmail;
     ImageView animalExplore, Profile1, Filter1, Find1, HomeMain1;
 
     public String email1;
@@ -62,7 +57,7 @@ public class Profile extends AppCompatActivity {
         infoButton = findViewById(R.id.addInfoButton);
         submit1 = findViewById(R.id.submitButton);
         deleteB = findViewById(R.id.deleteUser);
-
+        updateSafety = findViewById(R.id.SatetyInfo);
 
         inputName = findViewById(R.id.NameEdit);
         inputAge = findViewById(R.id.AgeEdit);
@@ -76,14 +71,26 @@ public class Profile extends AppCompatActivity {
 
         sideNavMenu();
         signOutFunction();
+        updateFunction();
+
+
+
+        deleteB.setOnClickListener(view -> {
+            confirmDialog();
+        });
+    }
+
+    private void updateFunction() {
+        updateSafety.setOnClickListener(v-> {
+            Bundle bundle1 = new Bundle();
+            Intent intent1 = new Intent(Profile.this, UpdateSafety.class);
+            intent1.putExtras(bundle1);
+            startActivity(intent1);
+        });
 
         infoButton.setOnClickListener(view -> {
             isItOrg();
             makeCreateVisible();
-        });
-
-        deleteB.setOnClickListener(view -> {
-            confirmDialog();
         });
     }
 

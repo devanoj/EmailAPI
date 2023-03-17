@@ -11,33 +11,44 @@
         android:id="@+id/addInfoButton"
         android:layout_width="420dp"
         android:layout_height="50dp"
-        android:layout_marginBottom="760dp"
-        android:text="Update Information on User"
+        android:layout_marginBottom="720dp"
+        android:text="Update General Info on User"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/SatetyInfo"
+        android:layout_width="420dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="760dp"
+        android:text="Update Safety Info on User"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
 
     <Button
         android:id="@+id/deleteUser"
         android:layout_width="410dp"
         android:layout_height="50dp"
-        android:layout_marginBottom="720dp"
+        android:layout_marginBottom="680dp"
         android:text="Delete User"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent" />
-
 
     <Button
         android:id="@+id/SignOut"
         android:layout_width="410dp"
         android:layout_height="50dp"
-        android:layout_marginBottom="678dp"
+        android:layout_marginBottom="632dp"
         android:text="Sign Out"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent" />
-
 
     <EditText
         android:id="@+id/NameEdit"
