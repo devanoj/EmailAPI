@@ -29,7 +29,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 public class UpdateSafety extends AppCompatActivity {
-    Button nextPage;
+    Button nextPage, back;
     Spinner spinnerAdult, gardenSpinner;
     EditText leftAlone, pType;
     CheckBox criminal, car;
@@ -50,10 +50,18 @@ public class UpdateSafety extends AppCompatActivity {
         gardenSpinner = findViewById(R.id.garden_spinner);
         leftAlone = findViewById(R.id.leftAlone);
         pType = findViewById(R.id.pType);
+        back = findViewById(R.id.back);
 
         handleCheckBox();
         handleSpinner();
         updateButton();
+        backButton();
+    }
+
+    private void backButton() {
+        back.setOnClickListener(v->{
+            goToProfile();
+        });
     }
 
     private void handleCheckBox() {
@@ -71,7 +79,11 @@ public class UpdateSafety extends AppCompatActivity {
 
     private void updateButton() {
         nextPage = findViewById(R.id.nextPage);
-        nextPage.setOnClickListener(v->{getIdforSafety();});}
+        nextPage.setOnClickListener(v->{
+            getIdforSafety();
+            goToProfile();
+        });
+    }
 
     private void getIdforSafety() {
         assert mUser != null;
