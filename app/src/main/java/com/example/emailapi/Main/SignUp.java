@@ -112,8 +112,13 @@ public class SignUp extends AppCompatActivity {
                         User person1 = new User(name1, dateOfBirth1, phoneNo1, eircode1, email, uid, organisation);
                         UserDAO uDAO = new UserDAO(person1, uid);
 
-                        Intent intent = new Intent(getApplicationContext(), AddSafetyInfo.class);
-                        startActivity(intent);
+                        if (organisation) {
+                            Intent intent = new Intent(getApplicationContext(), LogIn.class);
+                            startActivity(intent);
+                        } else {
+                            Intent intent = new Intent(getApplicationContext(), AddSafetyInfo.class);
+                            startActivity(intent);
+                        }
                     } else {
 
                         // If sign in fails, display a message to the user.
