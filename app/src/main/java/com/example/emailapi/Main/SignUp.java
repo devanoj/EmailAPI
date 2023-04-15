@@ -83,7 +83,7 @@ public class SignUp extends AppCompatActivity {
             return;
         } else if (!dateOfBirth1.matches("(0[1-9]|1[0-2])/(0[1-9]|[1-2][0-9]|3[01])/\\d{4}")) {
             // If dateOfBirth1 is not null or empty, but it's not in the correct format, show an error message
-            Toast.makeText(getApplicationContext(), "Date format should be in number XX/XX/XXXX", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Date format should be in number XX/XX/XXXX & be valid dates", Toast.LENGTH_SHORT).show();
             return;
         }
 

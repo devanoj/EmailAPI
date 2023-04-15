@@ -217,6 +217,11 @@ public class SubmissionPage extends AppCompatActivity {
 
         inputAnimal.setOnClickListener(v -> {
             if (cUser.equals(idUser)) {
+                if (!inputAge1.getText().toString().matches("(0[1-9]|1[0-2])/(0[1-9]|[1-2][0-9]|3[01])/\\d{4}")) {
+                    // If dateOfBirth1 is not null or empty, but it's not in the correct format, show an error message
+                    Toast.makeText(getApplicationContext(), "Date format should be in number XX/XX/XXXX & be valid dates", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 updateAnimalFeatures();
             } else {
                 Toast.makeText(this, "You don't the permission", Toast.LENGTH_SHORT).show();
