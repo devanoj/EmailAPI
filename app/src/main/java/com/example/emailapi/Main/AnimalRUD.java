@@ -78,7 +78,7 @@ public class AnimalRUD extends AppCompatActivity {
         adapter = new FirebaseRecyclerAdapter<Animal, CategoryViewHolder>(options) {
             @Override
             protected void onBindViewHolder(@NonNull CategoryViewHolder holder, int position, @NonNull Animal model) {
-                holder.cat.setText(model.getAge());
+                holder.cat.setText(model.getDOB());
                 holder.dead.setText(model.getBreed());
                 holder.desc.setText(model.getEnergyLevel());
                 holder.stat.setText(model.getName());

@@ -17,8 +17,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.Observer;
 
 import com.example.emailapi.Entity.Animal;
 import com.example.emailapi.R;
@@ -34,7 +32,6 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
 
 import java.util.Properties;
-import java.util.concurrent.CompletableFuture;
 
 import javax.mail.Authenticator;
 import javax.mail.Message;
@@ -247,7 +244,7 @@ public class SubmissionPage extends AppCompatActivity {
                     animal.setName(inputName1.getText().toString());
                 }
                 if (!TextUtils.isEmpty(inputAge1.getText().toString())) {
-                    animal.setAge(inputAge1.getText().toString());
+                    animal.setDOB(inputAge1.getText().toString());
                 }
                 if (!TextUtils.isEmpty(inputBreed.getText().toString())) {
                     animal.setBreed(inputBreed.getText().toString());

@@ -5,7 +5,7 @@ import androidx.annotation.Nullable;
 public class Animal {
     private String animalID;
     private String name;
-    private String age;
+    private String dob;
     private String breed;
     private String energyLevel;
     private String email;
@@ -16,7 +16,7 @@ public class Animal {
     public Animal() {
         this.animalID="";
         this.name="";
-        this.age="";
+        this.dob="";
         this.breed="";
         this.energyLevel="";
         this.email="";
@@ -27,10 +27,10 @@ public class Animal {
 
 
 
-    public Animal(String uid, String animalID, String name, String age, String breed, String energyLevel, String email, String mImageUrl, String from) {
+    public Animal(String uid, String animalID, String name, String dob, String breed, String energyLevel, String email, String mImageUrl, String from) {
         this.animalID=animalID;
         this.name=name;
-        this.age=age;
+        this.dob=dob;
         this.breed=breed;
         this.energyLevel=energyLevel;
         this.email=email;
@@ -87,12 +87,12 @@ public class Animal {
         this.name = name;
     }
 
-    public String getAge() {
-        return age;
+    public String getDOB() {
+        return dob;
     }
 
-    public void setAge(String age) {
-        this.age = age;
+    public void setDOB(String dob) {
+        this.dob = dob;
     }
 
     public String getBreed() {

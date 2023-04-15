@@ -55,7 +55,7 @@ public class newAdapter extends RecyclerView.Adapter<newAdapter.CategoryViewHold
     public void onBindViewHolder(@NonNull CategoryViewHolder holder, int position) {
 
         Animal tlist1 = arrayList.get(position);
-        holder.t1.setText(tlist1.getAge());
+        holder.t1.setText(tlist1.getDOB());
         holder.t2.setText(tlist1.getBreed());
         holder.t3.setText(tlist1.getEnergyLevel());
         holder.t4.setText(tlist1.getName());
