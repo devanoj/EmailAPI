@@ -47,7 +47,7 @@ public class Create extends AppCompatActivity {
     StorageReference mStorageRef;
     DatabaseReference mDatabaseRef; // Just a test later put the reference into reference
 
-    private static final int AMNT_PICK_IMAGE = 1;
+    private static final int AMNT_PICK_IMAGE = 1; //Change manually to 1
     String email1;
     String uid;
     String from;

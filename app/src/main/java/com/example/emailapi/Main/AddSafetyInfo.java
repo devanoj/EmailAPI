@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -59,19 +60,25 @@ public class AddSafetyInfo extends AppCompatActivity {
     private void addToFirebase() {
         nextPage = findViewById(R.id.nextPage);
         nextPage.setOnClickListener(v->{
-            String adult = spinnerAdult.getSelectedItem().toString();
-            String garden = gardenSpinner.getSelectedItem().toString();
-            String hrsAlone = leftAlone.getText().toString();
-            String property = pType.getText().toString();
+            if (criminal1 = true) {
 
-            assert mUser != null;
-            String ussid = mUser.getUid();
-            String safetyId = null;
+                Toast.makeText(this, "Criminals cannot register", Toast.LENGTH_SHORT).show();
+            }
+            else {
+                String adult = spinnerAdult.getSelectedItem().toString();
+                String garden = gardenSpinner.getSelectedItem().toString();
+                String hrsAlone = leftAlone.getText().toString();
+                String property = pType.getText().toString();
+
+                assert mUser != null;
+                String ussid = mUser.getUid();
+                String safetyId = null;
 
 
-            Safety add1 = new Safety(safetyId, car1, criminal1, ussid, adult, garden, hrsAlone, property);
-            SafetyDAO sDAO = new SafetyDAO(add1);
-            goToLogin();
+                Safety add1 = new Safety(safetyId, car1, criminal1, ussid, adult, garden, hrsAlone, property);
+                SafetyDAO sDAO = new SafetyDAO(add1);
+                goToLogin();
+            }
 
         });
 
@@ -98,4 +105,6 @@ public class AddSafetyInfo extends AppCompatActivity {
         intent1.putExtras(bundle1);
         startActivity(intent1);
     }
+    
+    
 }
