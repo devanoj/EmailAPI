@@ -17,6 +17,9 @@ import com.example.emailapi.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.util.Calendar;
+import java.util.Date;
+
 public class SignUp extends AppCompatActivity {
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
     FirebaseUser mUser;
@@ -85,6 +88,24 @@ public class SignUp extends AppCompatActivity {
             // If dateOfBirth1 is not null or empty, but it's not in the correct format, show an error message
             Toast.makeText(getApplicationContext(), "Date format should be in number XX/XX/XXXX & be valid dates", Toast.LENGTH_SHORT).show();
             return;
+        }else {
+
+            // Check if the user is above 18 years of age based on date of birth
+            String[] dobParts = dateOfBirth1.split("/");
+            int day = Integer.parseInt(dobParts[0]);
+            int month = Integer.parseInt(dobParts[1]);
+            int year = Integer.parseInt(dobParts[2]);
+
+            Calendar currentDate = Calendar.getInstance();
+            currentDate.setTime(new Date());
+            currentDate.add(Calendar.YEAR, -18);
+            Calendar dob = Calendar.getInstance();
+            dob.set(year, month - 1, day);
+
+            if (dob.after(currentDate)) {
+                Toast.makeText(getApplicationContext(), "You must be at least 18 years old", Toast.LENGTH_SHORT).show();
+                return;
+            }
         }
 
         registerUser(email, password, name1, dateOfBirth1, organisation, phoneNo1, eircode1);
