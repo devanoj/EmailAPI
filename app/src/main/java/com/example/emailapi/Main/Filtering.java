@@ -65,12 +65,9 @@ public class Filtering extends AppCompatActivity {
         getRequest = findViewById(R.id.GetRequest);
         EnterDogName = findViewById(R.id.Similar);
 
-
-
         sideNavMenu();
         //getRequest();
         executeDogAPI();
-
     }
 
     private void executeDogAPI() {

@@ -7,8 +7,10 @@ import android.content.ContentResolver;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
@@ -18,8 +20,16 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.android.volley.Response;
 import com.example.emailapi.Entity.Animal;
 import com.example.emailapi.R;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -31,21 +41,11 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
 
-import java.util.Properties;
-
-import javax.mail.Authenticator;
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.PasswordAuthentication;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
 
 
 public class SubmissionPage extends AppCompatActivity {
     TextView nameDog, display, displaytime, inputName1, inputAge1, inputBreed, inputEnergy, meeting1, displayDateEnd;
-    Button dateButton, cMail, deleteAnimal, updateAnimal, mButtonChooseImage, backToHome, inputAnimal, EndTime;
+    Button dateButton, cMail, deleteAnimal, updateAnimal, mButtonChooseImage, backToHome, inputAnimal, EndTime, testMail;
 
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
     FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -66,7 +66,6 @@ public class SubmissionPage extends AppCompatActivity {
         assert currentUser != null;
         cUser = currentUser.getUid();
     }
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,6 +90,11 @@ public class SubmissionPage extends AppCompatActivity {
         mButtonChooseImage = findViewById(R.id.button_choose_image);
         inputAnimal = findViewById(R.id.submitButton1);
         EndTime = findViewById(R.id.endTime);
+        
+        testMail = findViewById(R.id.testMail);
+        testMail.setOnClickListener(v->{
+            testMail1();
+        });
 
         userPermissions();
         displayDogName();
@@ -121,6 +125,38 @@ public class SubmissionPage extends AppCompatActivity {
 
     }
 
+    private void testMail1() {
+        try {
+            String baseUrl = "http://10.0.2.2:8000/send/";
+            String email = "devanojose4@gmail.com";
+
+            // Construct the complete URL
+            String link = baseUrl + email;
+
+            RequestQueue requestQueue = Volley.newRequestQueue(this);
+            StringRequest stringRequest = new StringRequest(Request.Method.GET, link,
+                    new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            // Process the response content as needed
+                            Toast.makeText(getApplicationContext(), "Email sent. Response: " + response, Toast.LENGTH_SHORT).show();
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Toast.makeText(getApplicationContext(), "Error Handling", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+
+            // Add the request to the RequestQueue
+            requestQueue.add(stringRequest);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            Toast.makeText(getApplicationContext(), "Email not sent", Toast.LENGTH_SHORT).show();
+        }
+    }
 
     private void goBackToFindActivity() {
         Bundle bundle2 = new Bundle();
@@ -335,7 +371,7 @@ public class SubmissionPage extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 rEmail = snapshot.getValue(String.class);
-                confirmAndMail(rEmail);
+                //confirmAndMail(rEmail);
                 removeAnimal();
             }
 
@@ -352,49 +388,6 @@ public class SubmissionPage extends AppCompatActivity {
 
         dr.child(id).removeValue();
         Toast.makeText(this, "Animal Chosen", Toast.LENGTH_SHORT).show();
-    }
-
-    private void confirmAndMail(String stringReceiverEmail) {
-        String time = displaytime.getText().toString();
-        String date = display.getText().toString();
-        Bundle getBundle = this.getIntent().getExtras();
-        String name = getBundle.getString("Name");
-
-        try {
-            String stringSenderEmail = "devanojose4@gmail.com";
-            String stringPasswordSenderEmail = "hfllnbeydaxihzez";
-            //String stringPasswordSenderEmail = "Xbjj7866";
-            //String stringReceiverEmail = "devanojos@gmail.com";
-
-            String stringHost = "smtp.gmail.com";
-            Properties properties = System.getProperties();
-            properties.put("mail.smtp.host", stringHost);
-            properties.put("mail.smtp.port", "465"); // Also tried 587
-            properties.put("mail.smtp.ssl.enable", "true");
-            properties.put("mail.smtp.auth", "true");
-
-            Session session = Session.getInstance(properties, new Authenticator() {
-                @Override
-                protected PasswordAuthentication getPasswordAuthentication() {
-                    return new PasswordAuthentication(stringSenderEmail, stringPasswordSenderEmail);
-                }
-            });
-
-            MimeMessage mimeMessage = new MimeMessage(session);
-            mimeMessage.addRecipient(Message.RecipientType.TO, new InternetAddress(stringReceiverEmail));
-            mimeMessage.setSubject("RE: Animal Fostering");
-            mimeMessage.setText("Hello User, \n\nWe are delighted to announce you are fostering a dog name " + name + ". " +
-                    "When: " + time + " on the " + date + "." +
-                    "\n\nCheers!\nAniFost");
-
-            Thread thread = new Thread(() -> {
-                try {Transport.send(mimeMessage);} catch (MessagingException e) {e.printStackTrace();}
-            });
-            thread.start();
-
-
-            Toast.makeText(getApplicationContext(), "Confirmation Email sent", Toast.LENGTH_SHORT).show();
-        } catch (MessagingException e) {e.printStackTrace();}
     }
 
     private void openTimePickerDialog() {

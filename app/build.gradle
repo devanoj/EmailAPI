@@ -23,6 +23,12 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+
+        debug {
+            // ...
+            // Create a buildConfigField for the SendGrid API key
+            buildConfigField("String", "SENDGRID_API_KEY", "\"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\"")
+        }
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -64,5 +70,4 @@ dependencies {
     implementation 'com.squareup.picasso:picasso:2.71828'
     implementation 'com.github.bumptech.glide:glide:4.12.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
-
 }
