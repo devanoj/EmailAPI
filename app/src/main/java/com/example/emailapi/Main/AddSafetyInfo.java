@@ -60,8 +60,7 @@ public class AddSafetyInfo extends AppCompatActivity {
     private void addToFirebase() {
         nextPage = findViewById(R.id.nextPage);
         nextPage.setOnClickListener(v->{
-            if (criminal1 = true) {
-
+            if (criminal1) {
                 Toast.makeText(this, "Criminals cannot register", Toast.LENGTH_SHORT).show();
             }
             else {

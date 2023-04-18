@@ -92,9 +92,9 @@ public class SubmissionPage extends AppCompatActivity {
         EndTime = findViewById(R.id.endTime);
         
         testMail = findViewById(R.id.testMail);
-        testMail.setOnClickListener(v->{
-            testMail1();
-        });
+//        testMail.setOnClickListener(v->{
+//            testMail1();
+//        });
 
         userPermissions();
         displayDogName();
@@ -125,31 +125,21 @@ public class SubmissionPage extends AppCompatActivity {
 
     }
 
-    private void testMail1() {
+    private void testMail1(String email) {
         try {
             String baseUrl = "http://10.0.2.2:8000/send/";
-            String email = "devanojose4@gmail.com";
+            //String email = "devanojose4@gmail.com";
 
             // Construct the complete URL
             String link = baseUrl + email;
 
             RequestQueue requestQueue = Volley.newRequestQueue(this);
             StringRequest stringRequest = new StringRequest(Request.Method.GET, link,
-                    new Response.Listener<String>() {
-                        @Override
-                        public void onResponse(String response) {
-                            // Process the response content as needed
-                            Toast.makeText(getApplicationContext(), "Email sent. Response: " + response, Toast.LENGTH_SHORT).show();
-                        }
+                    response -> {
+                        Toast.makeText(getApplicationContext(), "Email sent. Response: " + response, Toast.LENGTH_SHORT).show();
                     },
-                    new Response.ErrorListener() {
-                        @Override
-                        public void onErrorResponse(VolleyError error) {
-                            Toast.makeText(getApplicationContext(), "Error Handling", Toast.LENGTH_SHORT).show();
-                        }
-                    });
+                    error -> Toast.makeText(getApplicationContext(), "Error Handling", Toast.LENGTH_SHORT).show());
 
-            // Add the request to the RequestQueue
             requestQueue.add(stringRequest);
 
         } catch (Exception e) {
@@ -372,6 +362,8 @@ public class SubmissionPage extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 rEmail = snapshot.getValue(String.class);
                 //confirmAndMail(rEmail);
+                testMail1(rEmail);
+                //Log.w("GET_EMAIL", rEmail);
                 removeAnimal();
             }
 
