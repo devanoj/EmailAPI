@@ -91,6 +91,6 @@
         android:layout_centerHorizontal="true"
         android:layout_marginStart="40dp"
         android:layout_marginTop="25dp"
-        android:text="forgot password"
+        android:text="Forgot Password"
         />
 </RelativeLayout>

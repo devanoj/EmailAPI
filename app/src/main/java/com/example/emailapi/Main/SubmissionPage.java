@@ -45,7 +45,7 @@ import com.google.firebase.storage.StorageTask;
 
 public class SubmissionPage extends AppCompatActivity {
     TextView nameDog, display, displaytime, inputName1, inputAge1, inputBreed, inputEnergy, meeting1, displayDateEnd;
-    Button dateButton, cMail, deleteAnimal, updateAnimal, mButtonChooseImage, backToHome, inputAnimal, EndTime, testMail;
+    Button dateButton, cMail, deleteAnimal, updateAnimal, mButtonChooseImage, backToHome, inputAnimal, EndTime;
 
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
     FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -90,11 +90,6 @@ public class SubmissionPage extends AppCompatActivity {
         mButtonChooseImage = findViewById(R.id.button_choose_image);
         inputAnimal = findViewById(R.id.submitButton1);
         EndTime = findViewById(R.id.endTime);
-        
-        testMail = findViewById(R.id.testMail);
-//        testMail.setOnClickListener(v->{
-//            testMail1();
-//        });
 
         userPermissions();
         displayDogName();
@@ -178,6 +173,7 @@ public class SubmissionPage extends AppCompatActivity {
         Bundle getBundle = this.getIntent().getExtras();
         String n = getBundle.getString("Name");
         nameDog.setText(n);
+        Log.w("DogNameDisplay", n);
     }
 
     private void userPermissions() {
@@ -220,6 +216,7 @@ public class SubmissionPage extends AppCompatActivity {
     private void showUpdate() {
         Bundle getBundle = this.getIntent().getExtras();
         String idUser = getBundle.getString("idFromUser");
+
 
         if (isVisible) {
             inputName1.setVisibility(View.INVISIBLE);

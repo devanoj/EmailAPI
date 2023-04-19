@@ -45,7 +45,7 @@ public class CategoryViewHolder extends RecyclerView.ViewHolder {
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
                 Bundle bundle = new Bundle();
-                bundle.putString("Name", cat.getText().toString());
+                bundle.putString("Name", stat.getText().toString());
                 bundle.putString("Age", desc.getText().toString());
                 bundle.putString("Id", id.getText().toString());
                 bundle.putString("idFromUser", idfromUser.getText().toString());
