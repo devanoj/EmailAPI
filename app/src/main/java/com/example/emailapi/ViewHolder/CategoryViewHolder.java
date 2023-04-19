@@ -16,7 +16,7 @@ import com.example.emailapi.Main.SubmissionPage;
 import com.example.emailapi.R;
 
 public class CategoryViewHolder extends RecyclerView.ViewHolder {
-    public TextView cat, dead, desc, stat, id, idfromUser, fromOrg;
+    public TextView cat, dead, desc, stat, id, idfromUser, fromOrg, email;
     public Button select;
     public ImageView pictureDog;
     private Context context;

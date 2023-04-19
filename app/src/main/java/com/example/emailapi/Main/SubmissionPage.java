@@ -117,7 +117,6 @@ public class SubmissionPage extends AppCompatActivity {
             getMailFromFirebase();
             goBackToHome();
         });
-
     }
 
     private void testMail1(String email) {
@@ -132,6 +131,8 @@ public class SubmissionPage extends AppCompatActivity {
             StringRequest stringRequest = new StringRequest(Request.Method.GET, link,
                     response -> {
                         Toast.makeText(getApplicationContext(), "Email sent. Response: " + response, Toast.LENGTH_SHORT).show();
+                        notifyShelterEmail();
+                        removeAnimal();
                     },
                     error -> Toast.makeText(getApplicationContext(), "Error Handling", Toast.LENGTH_SHORT).show());
 
@@ -141,6 +142,44 @@ public class SubmissionPage extends AppCompatActivity {
             e.printStackTrace();
             Toast.makeText(getApplicationContext(), "Email not sent", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    private void notifyShelterEmail() {
+        Bundle getBundle = this.getIntent().getExtras();
+        String idAnimal = getBundle.getString("Id");
+
+        dr.child(idAnimal).child("email").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                String email = snapshot.getValue(String.class);
+                Log.w("GET_EMAIL", email);
+
+                try {
+                    String baseUrl = "http://10.0.2.2:8000/EmailShelter/";
+                    //String email = "devanojose4@gmail.com";
+
+                    // Construct the complete URL
+                    String link = baseUrl + email;
+
+                    RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+                    StringRequest stringRequest = new StringRequest(Request.Method.GET, link,
+                            response -> {
+                                Toast.makeText(getApplicationContext(), "Email sent. Response: " + response, Toast.LENGTH_SHORT).show();
+                            },
+                            error -> Toast.makeText(getApplicationContext(), "Error Handling", Toast.LENGTH_SHORT).show());
+
+                    requestQueue.add(stringRequest);
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Toast.makeText(getApplicationContext(), "Email not sent", Toast.LENGTH_SHORT).show();
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {Toast.makeText(getApplicationContext(), "Organisation not found", Toast.LENGTH_SHORT).show();}
+        });
+
+
     }
 
     private void goBackToFindActivity() {
@@ -358,10 +397,7 @@ public class SubmissionPage extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 rEmail = snapshot.getValue(String.class);
-                //confirmAndMail(rEmail);
                 testMail1(rEmail);
-                //Log.w("GET_EMAIL", rEmail);
-                removeAnimal();
             }
 
             @Override
