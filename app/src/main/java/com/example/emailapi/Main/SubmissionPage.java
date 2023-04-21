@@ -41,6 +41,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
 
+import java.util.concurrent.CompletableFuture;
 
 
 public class SubmissionPage extends AppCompatActivity {
@@ -121,12 +122,15 @@ public class SubmissionPage extends AppCompatActivity {
     }
 
     private void testMail1(String email) {
+        Bundle getBundle = this.getIntent().getExtras();
+        String dogName = getBundle.getString("Name");
+
         try {
             String baseUrl = "http://10.0.2.2:8000/send/";
             //String email = "devanojose4@gmail.com";
 
             // Construct the complete URL
-            String link = baseUrl + email;
+            String link = baseUrl + email + "?dogName=" + dogName;
 
             RequestQueue requestQueue = Volley.newRequestQueue(this);
             StringRequest stringRequest = new StringRequest(Request.Method.GET, link,
@@ -148,9 +152,7 @@ public class SubmissionPage extends AppCompatActivity {
     private void notifyShelterEmail() {
         Bundle getBundle = this.getIntent().getExtras();
         String idAnimal = getBundle.getString("Id");
-        String garden = "yes";
-        String adult = "Three";
-
+        String dogName = getBundle.getString("Name");
 
 
         dr.child(idAnimal).child("email").addListenerForSingleValueEvent(new ValueEventListener() {
@@ -162,10 +164,9 @@ public class SubmissionPage extends AppCompatActivity {
                 try {
                     String baseUrl = "http://10.0.2.2:8000/EmailShelter/";
                     //String email = "devanojose4@gmail.com";
-
-                    // Construct the complete URL
                     // String link = baseUrl + email;
-                    String link = baseUrl + email + "?garden=" + garden + "&adult=" + adult;
+                    String link = baseUrl + email + "?id=" + cUser + "&Dname=" + dogName;
+                    Log.w("GET_LINK", link);
 
 
                     RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
@@ -200,17 +201,11 @@ public class SubmissionPage extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage("Are you sure you want to proceed?")
                 .setCancelable(false)
-                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        setUpDeleteButton();
-                        goBackToHome();
-                    }
+                .setPositiveButton("Yes", (dialog, id) -> {
+                    setUpDeleteButton();
+                    goBackToHome();
                 })
-                .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        dialog.cancel();
-                    }
-                });
+                .setNegativeButton("No", (dialog, id) -> dialog.cancel());
         AlertDialog alert = builder.create();
         alert.show();
     }
