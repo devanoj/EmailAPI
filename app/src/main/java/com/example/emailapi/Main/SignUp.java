@@ -130,7 +130,7 @@ public class SignUp extends AppCompatActivity {
                         String uid = mUser.getUid();
 
 
-                        User person1 = new User(name1, dateOfBirth1, phoneNo1, eircode1, email, uid, organisation);
+                        User person1 = new User(name1, dateOfBirth1, phoneNo1, eircode1, email, uid, organisation, null);
                         UserDAO uDAO = new UserDAO(person1, uid);
 
                         if (organisation) {

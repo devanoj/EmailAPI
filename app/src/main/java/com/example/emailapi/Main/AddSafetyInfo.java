@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.emailapi.DAO.SafetyDAO;
@@ -18,6 +19,11 @@ import com.example.emailapi.Entity.Safety;
 import com.example.emailapi.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class AddSafetyInfo extends AppCompatActivity {
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
@@ -28,6 +34,8 @@ public class AddSafetyInfo extends AppCompatActivity {
     CheckBox criminal, car;
     Boolean criminal1 = false; //boolean is more memory efficient than Boolean, however Boolean can be null
     Boolean car1 = false;
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference drUser = database.getReference("User");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,7 +83,7 @@ public class AddSafetyInfo extends AppCompatActivity {
 
 
                 Safety add1 = new Safety(safetyId, car1, criminal1, ussid, adult, garden, hrsAlone, property);
-                SafetyDAO sDAO = new SafetyDAO(add1);
+                SafetyDAO sDAO = new SafetyDAO(add1, ussid);
                 goToLogin();
             }
 

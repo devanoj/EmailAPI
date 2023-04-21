@@ -210,7 +210,7 @@ public class Profile extends AppCompatActivity {
 
     private void submitUser() {
         submit1.setOnClickListener(view -> {
-            User person1 = new User(inputName.getText().toString(), inputAge.getText().toString(), inputLS.getText().toString(), inputFT.getText().toString(), email1, userId, true);
+            User person1 = new User(inputName.getText().toString(), inputAge.getText().toString(), inputLS.getText().toString(), inputFT.getText().toString(), email1, userId, true,null);
             UserDAO uDAO = new UserDAO(person1, userId);
             Toast.makeText(Profile.this, "Updated Data", Toast.LENGTH_SHORT).show();
         });

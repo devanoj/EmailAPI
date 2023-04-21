@@ -11,6 +11,7 @@ public class User {
     private String eirCode;
     private String email;
     private String uid; // This is uid for some reason, it was like this before
+    private String safetyIDfUser;
     private Boolean organisation;
 
     public User() {
@@ -21,9 +22,10 @@ public class User {
         this.email="";
         this.uid="";
         this.organisation=false;
+        this.safetyIDfUser=safetyIDfUser;
     }
 
-    public User(String name, String dateOfBirth, String phoneNo, String eirCode, String email, String uid, Boolean organisation) {
+    public User(String name, String dateOfBirth, String phoneNo, String eirCode, String email, String uid, Boolean organisation, String safetyIDfUser) {
         this.name=name;
         this.dateOfBirth=dateOfBirth;
         this.phoneNo=phoneNo;
@@ -31,6 +33,15 @@ public class User {
         this.email=email;
         this.uid=uid;
         this.organisation=organisation;
+        this.safetyIDfUser = safetyIDfUser;
+    }
+
+    public String getSafetyIDfUser() {
+        return safetyIDfUser;
+    }
+
+    public void setSafetyIDfUser(String safetyID) {
+        this.safetyIDfUser = safetyID;
     }
 
     public Boolean getOrganisation() {

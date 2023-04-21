@@ -51,6 +51,7 @@ public class SubmissionPage extends AppCompatActivity {
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference dr = database.getReference("Animal");
     DatabaseReference drUser = database.getReference("User");
+    DatabaseReference drSafety = database.getReference("Safety");
     FirebaseUser currentUser = mAuth.getCurrentUser();
 
     public static final int AMNT_PICK_IMAGE = 1;
@@ -147,6 +148,10 @@ public class SubmissionPage extends AppCompatActivity {
     private void notifyShelterEmail() {
         Bundle getBundle = this.getIntent().getExtras();
         String idAnimal = getBundle.getString("Id");
+        String garden = "yes";
+        String adult = "Three";
+
+
 
         dr.child(idAnimal).child("email").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -159,7 +164,9 @@ public class SubmissionPage extends AppCompatActivity {
                     //String email = "devanojose4@gmail.com";
 
                     // Construct the complete URL
-                    String link = baseUrl + email;
+                    // String link = baseUrl + email;
+                    String link = baseUrl + email + "?garden=" + garden + "&adult=" + adult;
+
 
                     RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
                     StringRequest stringRequest = new StringRequest(Request.Method.GET, link,
