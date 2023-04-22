@@ -30,6 +30,7 @@ import com.android.volley.Response;
 import com.example.emailapi.Entity.Animal;
 import com.example.emailapi.R;
 
+import com.example.emailapi.SharedPref.MyDataHolder;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -41,6 +42,10 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.concurrent.CompletableFuture;
 
 
@@ -96,17 +101,11 @@ public class SubmissionPage extends AppCompatActivity {
         userPermissions();
         displayDogName();
 
-        backToHome.setOnClickListener(v -> {
-            goBackToFindActivity();
-        });
+        backToHome.setOnClickListener(v -> goBackToFindActivity());
 
-        deleteAnimal.setOnClickListener(v -> {
-            confirmDialog();
-        });
+        deleteAnimal.setOnClickListener(v -> confirmDialog());
 
-        updateAnimal.setOnClickListener(v3 -> {
-            showUpdate();
-        });
+        updateAnimal.setOnClickListener(v3 -> showUpdate());
 
 
         dateButton.setOnClickListener(view -> {
@@ -127,9 +126,6 @@ public class SubmissionPage extends AppCompatActivity {
 
         try {
             String baseUrl = "http://10.0.2.2:8000/send/";
-            //String email = "devanojose4@gmail.com";
-
-            // Construct the complete URL
             String link = baseUrl + email + "?dogName=" + dogName;
 
             RequestQueue requestQueue = Volley.newRequestQueue(this);
@@ -153,7 +149,21 @@ public class SubmissionPage extends AppCompatActivity {
         Bundle getBundle = this.getIntent().getExtras();
         String idAnimal = getBundle.getString("Id");
         String dogName = getBundle.getString("Name");
+        String sT = displaytime.getText().toString();
+        String sD = display.getText().toString();
+        String eD = displayDateEnd.getText().toString();
 
+        MyDataHolder myDataHolder = new MyDataHolder(getApplicationContext());
+        ArrayList<String> myArrayList = new ArrayList<>();
+        myArrayList.add(idAnimal);
+        myArrayList.add(eD);
+        myDataHolder.saveArrayList(myArrayList, cUser);
+
+
+        ArrayList<String> myList = myDataHolder.getArrayList(cUser);
+        for (String item : myList) {
+            Log.d("ArrayListPrint", item);
+        }
 
         dr.child(idAnimal).child("email").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -163,11 +173,8 @@ public class SubmissionPage extends AppCompatActivity {
 
                 try {
                     String baseUrl = "http://10.0.2.2:8000/EmailShelter/";
-                    //String email = "devanojose4@gmail.com";
-                    // String link = baseUrl + email;
-                    String link = baseUrl + email + "?id=" + cUser + "&Dname=" + dogName;
+                    String link = baseUrl + email + "?id=" + cUser + "&Dname=" + dogName + "&sT=" + sT + "&sD=" + sD + "&eD=" + eD;
                     Log.w("GET_LINK", link);
-
 
                     RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
                     StringRequest stringRequest = new StringRequest(Request.Method.GET, link,
@@ -189,6 +196,8 @@ public class SubmissionPage extends AppCompatActivity {
 
 
     }
+
+
 
     private void goBackToFindActivity() {
         Bundle bundle2 = new Bundle();
@@ -424,7 +433,7 @@ public class SubmissionPage extends AppCompatActivity {
 
     private void openDatePickerDialog() {
         DatePickerDialog datePickerDialog = new DatePickerDialog(this, (datePicker, year, month, day) -> {
-            month = month + 1; // Weird bug where where begining of month is 0 so add 1
+            month = month + 1; // Weird code where where beginning of month is 0 so add 1, but isn't like that for day or year
             display.setText(year + "."+ month + "."+ day);
         }, 2023, 1, 20);
         datePickerDialog.show();
@@ -433,7 +442,7 @@ public class SubmissionPage extends AppCompatActivity {
     private void openDateFinish() {
         EndTime.setOnClickListener(v -> {
             DatePickerDialog datePickerDialog = new DatePickerDialog(this, (datePicker, year, month, day) -> {
-                month = month + 1; // Weird bug where where begining of month is 0 so add 1
+                month = month + 1; // Beginning of month is 0 so add 1
                 displayDateEnd.setText(year + "."+ month + "."+ day);
             }, 2023, 1, 20);
             datePickerDialog.show();

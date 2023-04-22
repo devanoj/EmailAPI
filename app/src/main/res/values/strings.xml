@@ -10,10 +10,15 @@
     <string-array name="my_array">
         <item>One</item>
         <item>Two</item>
-        <item>Three</item>
+        <item>Three Or More</item>
     </string-array>
 
     <string-array name="garden_array">
+        <item>Yes</item>
+        <item>No</item>
+    </string-array>
+
+    <string-array name="other_array">
         <item>Yes</item>
         <item>No</item>
     </string-array>

@@ -28,8 +28,8 @@ import com.google.firebase.database.ValueEventListener;
 public class AddSafetyInfo extends AppCompatActivity {
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
     FirebaseUser mUser = mAuth.getCurrentUser();
-    Button nextPage;
-    Spinner spinnerAdult, gardenSpinner;
+    Button nextPage, back;
+    Spinner spinnerAdult, gardenSpinner, oSpinner1;
     EditText leftAlone, pType;
     CheckBox criminal, car;
     Boolean criminal1 = false; //boolean is more memory efficient than Boolean, however Boolean can be null
@@ -44,12 +44,22 @@ public class AddSafetyInfo extends AppCompatActivity {
 
         spinnerAdult = findViewById(R.id.my_spinner);
         gardenSpinner = findViewById(R.id.garden_spinner);
+        oSpinner1 = findViewById(R.id.other_spinner);
         leftAlone = findViewById(R.id.leftAlone);
         pType = findViewById(R.id.pType);
 
         handleCheckBox();
         handleSpinner();
         addToFirebase();
+        backButton();
+    }
+
+    private void backButton() {
+        back = findViewById(R.id.back);
+        back.setOnClickListener(v->{
+            goToLogin();
+        });
+
     }
 
     private void handleCheckBox() {
@@ -69,11 +79,12 @@ public class AddSafetyInfo extends AppCompatActivity {
         nextPage = findViewById(R.id.nextPage);
         nextPage.setOnClickListener(v->{
             if (criminal1) {
-                Toast.makeText(this, "Criminals cannot register", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Criminals will have a harder time fostering", Toast.LENGTH_SHORT).show();
             }
-            else {
+
                 String adult = spinnerAdult.getSelectedItem().toString();
                 String garden = gardenSpinner.getSelectedItem().toString();
+                String otherS = oSpinner1.getSelectedItem().toString();
                 String hrsAlone = leftAlone.getText().toString();
                 String property = pType.getText().toString();
 
@@ -81,34 +92,34 @@ public class AddSafetyInfo extends AppCompatActivity {
                 String ussid = mUser.getUid();
                 String safetyId = null;
 
-
-                Safety add1 = new Safety(safetyId, car1, criminal1, ussid, adult, garden, hrsAlone, property);
+                Safety add1 = new Safety(safetyId, car1, criminal1, adult, garden, hrsAlone, property, otherS);
                 SafetyDAO sDAO = new SafetyDAO(add1, ussid);
                 goToLogin();
-            }
+
 
         });
-
-
-        //            Log.d("ItemChosenXXX", "Selected item 1: " + adult);
-        //            Log.d("ItemChosenXXX", "Selected item 2: " + garden);
     }
 
     private void handleSpinner() {
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.my_array, android.R.layout.simple_spinner_item);
+                R.array.my_array, R.layout.simple_spinner_item_one);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerAdult.setAdapter(adapter);
 
         ArrayAdapter<CharSequence> aGardenSpinner = ArrayAdapter.createFromResource(this,
-                R.array.garden_array, android.R.layout.simple_spinner_item);
+                R.array.garden_array, R.layout.simple_spinner_item_one);
         aGardenSpinner.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         gardenSpinner.setAdapter(aGardenSpinner);
+
+        ArrayAdapter<CharSequence> oSpinner = ArrayAdapter.createFromResource(this,
+                R.array.other_array, R.layout.simple_spinner_item_one);
+        oSpinner.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        oSpinner1.setAdapter(oSpinner);
     }
 
     private void goToLogin() {
         Bundle bundle1 = new Bundle();
-        Intent intent1 = new Intent(AddSafetyInfo.this, SignUp.class);
+        Intent intent1 = new Intent(AddSafetyInfo.this, LogIn.class);
         intent1.putExtras(bundle1);
         startActivity(intent1);
     }

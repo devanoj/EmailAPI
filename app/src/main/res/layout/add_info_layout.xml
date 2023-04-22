@@ -14,12 +14,10 @@
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
         android:layout_marginTop="30dp"
-        android:ems="10"
         android:hint="Daily hours dog will be alone"
-        android:minHeight="48dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:padding="20dp"
+        android:padding="10dp"
         android:textColor="@color/white"
         android:textColorHint="@color/white"
         android:background="#30ffffff"/>
@@ -33,10 +31,9 @@
         android:layout_marginTop="7dp"
         android:ems="10"
         android:hint="Type of property"
-        android:minHeight="48dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/leftAlone"
-        android:padding="20dp"
+        android:padding="10dp"
         android:textColor="@color/white"
         android:textColorHint="@color/white"
         android:background="#30ffffff"/>
@@ -76,21 +73,20 @@
         android:id="@+id/my_spinner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="296dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginStart="256dp"
+        android:layout_marginTop="17dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/car_checkbox" />
 
     <TextView
         android:id="@+id/adult"
         android:layout_width="229dp"
-        android:layout_height="66dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginTop="7dp"
         android:background="#30ffffff"
         android:ems="10"
-        android:minHeight="48dp"
-        android:padding="20dp"
+        android:padding="10dp"
         android:text="How many adults in the house"
         android:textColor="@color/white"
         android:textColorHint="@color/white"
@@ -100,26 +96,40 @@
     <TextView
         android:id="@+id/garden"
         android:layout_width="229dp"
-        android:layout_height="66dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginTop="7dp"
         android:background="#30ffffff"
         android:ems="10"
-        android:minHeight="48dp"
-        android:padding="20dp"
+        android:padding="10dp"
         android:text="Is there a garden"
         android:textColor="@color/white"
         android:textColorHint="@color/white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/adult" />
 
+    <TextView
+        android:id="@+id/otherd"
+        android:layout_width="229dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="7dp"
+        android:background="#30ffffff"
+        android:ems="10"
+        android:padding="10dp"
+        android:text="Is other dogs or animals in the house"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/garden" />
+
     <Button
         android:id="@+id/back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="60dp"
+        android:layout_marginStart="40dp"
         android:layout_marginBottom="68dp"
-        android:text="Back"
+        android:text="Back To Login"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -127,9 +137,9 @@
         android:id="@+id/nextPage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="236dp"
+        android:layout_marginStart="224dp"
         android:layout_marginBottom="68dp"
-        android:text="Next"
+        android:text="Add Safety Info"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -137,9 +147,18 @@
         android:id="@+id/garden_spinner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="296dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginStart="256dp"
+        android:layout_marginTop="17dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/adult" />
+
+    <Spinner
+        android:id="@+id/other_spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="256dp"
+        android:layout_marginTop="17dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/garden" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
