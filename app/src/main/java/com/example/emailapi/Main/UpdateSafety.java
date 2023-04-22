@@ -30,7 +30,7 @@ import com.google.firebase.storage.StorageReference;
 
 public class UpdateSafety extends AppCompatActivity {
     Button nextPage, back;
-    Spinner spinnerAdult, gardenSpinner;
+    Spinner spinnerAdult, gardenSpinner, oSpinner1;
     EditText leftAlone, pType;
     CheckBox criminal, car;
     Boolean criminal1 = false; //boolean is more memory efficient than Boolean, however Boolean can be null
@@ -48,6 +48,7 @@ public class UpdateSafety extends AppCompatActivity {
         setContentView(R.layout.update_safety_layout);
         spinnerAdult = findViewById(R.id.my_spinner);
         gardenSpinner = findViewById(R.id.garden_spinner);
+        oSpinner1 = findViewById(R.id.other_spinner);
         leftAlone = findViewById(R.id.leftAlone);
         pType = findViewById(R.id.pType);
         back = findViewById(R.id.back);
@@ -125,12 +126,15 @@ public class UpdateSafety extends AppCompatActivity {
                     sInfo.setProperty(pType.getText().toString());
                 }
 
+
                 String adult = spinnerAdult.getSelectedItem().toString();
                 String garden = gardenSpinner.getSelectedItem().toString();
+                String otherS = oSpinner1.getSelectedItem().toString();
                 sInfo.setAdult(adult);
                 sInfo.setGarden(garden);
                 sInfo.setCar(car1);
                 sInfo.setCriminal(criminal1);
+                sInfo.setOtherAnimal(otherS);
 
                 dr.child(safetyID).setValue(sInfo)
                         .addOnSuccessListener(aVoid -> Toast.makeText(UpdateSafety.this, "Safety Info updated successfully", Toast.LENGTH_SHORT).show())
@@ -150,14 +154,19 @@ public class UpdateSafety extends AppCompatActivity {
 
     private void handleSpinner() {
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.my_array, android.R.layout.simple_spinner_item);
+                R.array.my_array, R.layout.simple_spinner_item_one);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerAdult.setAdapter(adapter);
 
         ArrayAdapter<CharSequence> aGardenSpinner = ArrayAdapter.createFromResource(this,
-                R.array.garden_array, android.R.layout.simple_spinner_item);
+                R.array.garden_array, R.layout.simple_spinner_item_one);
         aGardenSpinner.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         gardenSpinner.setAdapter(aGardenSpinner);
+
+        ArrayAdapter<CharSequence> oSpinner = ArrayAdapter.createFromResource(this,
+                R.array.other_array, R.layout.simple_spinner_item_one);
+        oSpinner.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        oSpinner1.setAdapter(oSpinner);
     }
 
     private void goToProfile() {

@@ -92,7 +92,7 @@ public class AddSafetyInfo extends AppCompatActivity {
                 String ussid = mUser.getUid();
                 String safetyId = null;
 
-                Safety add1 = new Safety(safetyId, car1, criminal1, adult, garden, hrsAlone, property, otherS);
+                Safety add1 = new Safety(safetyId, car1, criminal1, adult, garden, hrsAlone, property, otherS, ussid);
                 SafetyDAO sDAO = new SafetyDAO(add1, ussid);
                 goToLogin();
 

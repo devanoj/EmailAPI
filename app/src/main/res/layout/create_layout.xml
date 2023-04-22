@@ -13,60 +13,80 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="0dp"
         android:layout_marginBottom="719dp"
-        android:text="Add Information Pet"
+        android:text="Add dog Information"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
 
     <EditText
         android:id="@+id/NameEdit1"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="184dp"
+        android:layout_marginEnd="20dp"
         android:layout_marginBottom="603dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:hint="Name"
+        android:padding="15dp"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:background="@drawable/edittext_border"
         android:visibility="invisible"
+        android:layout_marginStart="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <EditText
         android:id="@+id/AgeEdit1"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="13dp"
+        android:layout_marginTop="0dp"
         android:ems="10"
         android:minHeight="48dp"
         android:hint="Date of Birth"
+        android:padding="15dp"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:background="@drawable/edittext_border"
         android:visibility="invisible"
+        android:layout_marginEnd="20dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/NameEdit1" />
 
     <EditText
         android:id="@+id/breed"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="17dp"
-        android:layout_marginTop="19dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="0dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:hint="Breed"
+        android:padding="15dp"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:background="@drawable/edittext_border"
         android:visibility="invisible"
+        android:layout_marginEnd="20dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/AgeEdit1" />
 
     <EditText
         android:id="@+id/energyLevel"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="17dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="0dp"
         android:ems="10"
         android:hint="Energy Level"
         android:inputType="textPersonName"
+        android:padding="15dp"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:background="@drawable/edittext_border"
         android:visibility="invisible"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/breed" />
 
@@ -77,7 +97,7 @@
         android:visibility="invisible"
         android:text="Choose file"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginStart="57dp"
+        android:layout_marginStart="150dp"
         android:layout_marginTop="14dp"
         app:layout_constraintTop_toBottomOf="@+id/energyLevel"/>
 
@@ -85,14 +105,12 @@
         android:id="@+id/submitButton1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="57dp"
-        android:layout_marginTop="74dp"
+        android:layout_marginStart="170dp"
+        android:layout_marginTop="94dp"
         android:text="Submit"
         android:visibility="invisible"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/energyLevel" />
-
-
 
 
     <Button
@@ -100,7 +118,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="760dp"
-        android:text="Animal Options"
+        android:text="SELECT DOG"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

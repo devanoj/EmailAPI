@@ -11,6 +11,7 @@ public class Safety {
     private String hoursAlone;
     private String property;
     private String otherAnimal;
+    private String ussid;
 
     public Safety() {
         this.SafetyId="";
@@ -21,9 +22,10 @@ public class Safety {
         this.hoursAlone="";
         this.property="";
         this.otherAnimal="";
+        this.ussid="";
     }
 
-    public Safety(String SafetyId, Boolean car1, Boolean criminal1, String adult, String garden, String hoursAlone, String property, String otherAnimal) {
+    public Safety(String SafetyId, Boolean car1, Boolean criminal1, String adult, String garden, String hoursAlone, String property, String otherAnimal, String ussid) {
         this.SafetyId=SafetyId;
         this.car1=car1;
         this.criminal1=criminal1;
@@ -32,6 +34,15 @@ public class Safety {
         this.hoursAlone=hoursAlone;
         this.property=property;
         this.otherAnimal=otherAnimal;
+        this.ussid=ussid;
+    }
+
+    public String getUssid() {
+        return ussid;
+    }
+
+    public void setUssid(String ussid) {
+        this.ussid = ussid;
     }
 
     public String getOtherAnimal() {

@@ -6,12 +6,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#9a183d">
 
-
     <EditText
         android:id="@+id/Similar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="170dp"
+        android:layout_marginEnd="190dp"
         android:layout_marginStart="20dp"
         android:layout_marginBottom="770dp"
         android:hint="Enter Dog Breed"
@@ -22,9 +21,9 @@
         android:id="@+id/GetRequest"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="10dp"
+        android:layout_marginEnd="5dp"
         android:layout_marginBottom="770dp"
-        android:text="Get Request"
+        android:text="recommendation"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -35,7 +34,7 @@
         android:layout_marginTop="152dp"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
-        android:text="Recommendation"
+        android:text=""
         android:textAlignment="center"
         android:textColor=" #FFFFFF"
         android:fontFamily="@font/aref_ruqaa"
@@ -51,7 +50,7 @@
         android:layout_marginEnd="20dp"
         android:layout_marginStart="20dp"
         android:fontFamily="@font/aref_ruqaa"
-        android:text="Recommendation"
+        android:text=""
         android:textAlignment="center"
         android:textColor=" #FFFFFF"
         android:textSize="16sp"

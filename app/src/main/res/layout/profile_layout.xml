@@ -9,7 +9,7 @@
 
     <Button
         android:id="@+id/addInfoButton"
-        android:layout_width="420dp"
+        android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginBottom="720dp"
         android:text="Update General Info on User"
@@ -19,7 +19,7 @@
 
     <Button
         android:id="@+id/SatetyInfo"
-        android:layout_width="420dp"
+        android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginBottom="760dp"
         android:text="Update Safety Info on User"
@@ -30,7 +30,7 @@
 
     <Button
         android:id="@+id/deleteUser"
-        android:layout_width="410dp"
+        android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginBottom="680dp"
         android:text="Delete User"
@@ -41,31 +41,35 @@
 
     <Button
         android:id="@+id/SignOut"
-        android:layout_width="410dp"
+        android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_marginBottom="632dp"
+        android:layout_marginBottom="640dp"
         android:text="Sign Out"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
         android:id="@+id/NameEdit"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="182dp"
-        android:layout_marginBottom="590dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="560dp"
         android:ems="10"
         android:hint="Name"
         android:inputType="textPersonName"
         android:visibility="invisible"
+        android:padding="15dp"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:background="@drawable/edittext_border"
+        android:layout_marginEnd="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <EditText
         android:id="@+id/freeTimeEdit"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="0dp"
@@ -73,24 +77,34 @@
         android:hint="Eircode"
         android:minHeight="48dp"
         android:visibility="invisible"
+        android:padding="15dp"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:background="@drawable/edittext_border"
+        android:layout_marginEnd="20dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/NameEdit" />
 
     <EditText
         android:id="@+id/lifestyleEdit"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="0dp"
         android:ems="10"
         android:hint="Phone Number"
         android:visibility="invisible"
+        android:padding="15dp"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:background="@drawable/edittext_border"
+        android:layout_marginEnd="20dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/freeTimeEdit" />
 
     <EditText
         android:id="@+id/AgeEdit"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="0dp"
@@ -98,6 +112,11 @@
         android:hint="Date of Birth"
         android:inputType="textPersonName"
         android:visibility="invisible"
+        android:padding="15dp"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:background="@drawable/edittext_border"
+        android:layout_marginEnd="20dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/lifestyleEdit" />
 
@@ -105,7 +124,7 @@
         android:id="@+id/submitButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
+        android:layout_marginStart="165dp"
         android:layout_marginTop="24dp"
         android:text="Submit"
         android:visibility="invisible"
