@@ -12,8 +12,16 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.emailapi.Main.AnimalRUD;
 import com.example.emailapi.Main.SubmissionPage;
 import com.example.emailapi.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class CategoryViewHolder extends RecyclerView.ViewHolder {
     public TextView cat, dead, desc, stat, id, idfromUser, fromOrg, email;
@@ -36,25 +44,22 @@ public class CategoryViewHolder extends RecyclerView.ViewHolder {
         pictureDog = itemView.findViewById(R.id.pictureOfDog);
         select = itemView.findViewById(R.id.selectAnimal);
 
+        select.setOnClickListener(v -> {
 
-        select.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(context, "Button clicked", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(itemView.getContext(), SubmissionPage.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            Toast.makeText(context, "Button clicked", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(itemView.getContext(), SubmissionPage.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
-                Bundle bundle = new Bundle();
-                bundle.putString("Name", stat.getText().toString());
-                bundle.putString("Age", desc.getText().toString());
-                bundle.putString("Id", id.getText().toString());
-                bundle.putString("idFromUser", idfromUser.getText().toString());
+            Bundle bundle = new Bundle();
+            bundle.putString("Name", stat.getText().toString());
+            bundle.putString("Age", desc.getText().toString());
+            bundle.putString("Id", id.getText().toString());
+            bundle.putString("idFromUser", idfromUser.getText().toString());
 
-                intent.putExtras(bundle);
+            intent.putExtras(bundle);
 
-                context.startActivity(intent);
+            context.startActivity(intent);
 
-            }
         });
     }
 

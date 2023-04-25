@@ -162,9 +162,10 @@ public class Home extends AppCompatActivity {
         drUser.child(cUser).child("organisation").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                boolean org = Boolean.TRUE.equals(snapshot.getValue(boolean.class));
-                if (org) {
+                Boolean org = snapshot.getValue(Boolean.class);
+                if (Boolean.TRUE.equals(org)) {
                     animalExplore.setVisibility(View.VISIBLE);
+                    Find1.setVisibility(View.INVISIBLE);
                 }
             }
             @Override

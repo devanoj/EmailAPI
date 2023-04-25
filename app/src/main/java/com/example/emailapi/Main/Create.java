@@ -186,12 +186,7 @@ public class Create extends AppCompatActivity {
             intent1.putExtras(bundle1);
             startActivity(intent1);
         });
-        Find1.setOnClickListener(v -> {
-            Bundle bundle1 = new Bundle();
-            Intent intent1 = new Intent(Create.this, FindActivity.class);
-            intent1.putExtras(bundle1);
-            startActivity(intent1);
-        });
+
         HomeMain1.setOnClickListener(v -> {
             Bundle bundle1 = new Bundle();
             Intent intent1 = new Intent(Create.this, Home.class);

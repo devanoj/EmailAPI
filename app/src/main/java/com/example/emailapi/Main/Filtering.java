@@ -352,6 +352,7 @@ public class Filtering extends AppCompatActivity {
                 boolean org = Boolean.TRUE.equals(snapshot.getValue(boolean.class));
                 if (org) {
                     animalExplore.setVisibility(View.VISIBLE);
+                    Find1.setVisibility(View.INVISIBLE);
                 }
             }
             @Override
