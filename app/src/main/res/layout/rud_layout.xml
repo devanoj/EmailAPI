@@ -9,22 +9,10 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerview1"
         android:layout_width="349dp"
-        android:layout_height="764dp"
-        android:layout_marginTop="60dp"
+        android:layout_height="784dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="60dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/inputVariable"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="75dp"
-        android:layout_marginTop="12dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:hint="Search"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
 
@@ -32,7 +20,7 @@
         android:id="@+id/backToCreate"
         android:layout_width="48dp"
         android:layout_height="48dp"
-        android:layout_marginTop="748dp"
+        android:layout_marginTop="756dp"
         android:layout_marginEnd="12dp"
         android:src="@drawable/go_back"
         app:layout_constraintEnd_toEndOf="parent"

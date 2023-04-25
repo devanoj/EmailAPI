@@ -30,7 +30,6 @@ import com.android.volley.Response;
 import com.example.emailapi.Entity.Animal;
 import com.example.emailapi.R;
 
-import com.example.emailapi.SharedPref.MyDataHolder;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -155,18 +154,6 @@ public class SubmissionPage extends AppCompatActivity {
         String sD = display.getText().toString();
         String eD = displayDateEnd.getText().toString();
 
-        MyDataHolder myDataHolder = new MyDataHolder(getApplicationContext());
-        ArrayList<String> myArrayList = new ArrayList<>();
-        myArrayList.add(idAnimal);
-        myArrayList.add(eD);
-        myDataHolder.saveArrayList(myArrayList, cUser);
-
-
-        ArrayList<String> myList = myDataHolder.getArrayList(cUser);
-        for (String item : myList) {
-            Log.d("ArrayListPrint", item);
-        }
-
         dr.child(idAnimal).child("email").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -202,10 +189,24 @@ public class SubmissionPage extends AppCompatActivity {
 
 
     private void goBackToFindActivity() {
-        Bundle bundle2 = new Bundle();
-        Intent intent2 = new Intent(SubmissionPage.this, FindActivity.class);
-        intent2.putExtras(bundle2);
-        startActivity(intent2);
+        drUser.child(cUser).child("organisation").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                boolean org = Boolean.TRUE.equals(snapshot.getValue(boolean.class));
+                Bundle bundle2 = new Bundle();
+                Intent intent2;
+                if (org) {
+                    intent2 = new Intent(getApplicationContext(), Create.class);
+                } else {
+                    intent2 = new Intent(SubmissionPage.this, FindActivity.class);
+                }
+                intent2.putExtras(bundle2);
+                startActivity(intent2);
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {Toast.makeText(getApplicationContext(), "Organisation not found", Toast.LENGTH_SHORT).show();}
+        });
+
     }
 
     private void confirmDialog() {

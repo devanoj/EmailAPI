@@ -3,11 +3,14 @@ package com.example.emailapi.Main;
 import android.content.Intent;
 import android.media.Image;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
@@ -15,6 +18,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.emailapi.Adapter.newAdapter;
 import com.example.emailapi.Entity.Animal;
 import com.example.emailapi.R;
 import com.example.emailapi.ViewHolder.CategoryViewHolder;
@@ -38,8 +42,8 @@ public class AnimalRUD extends AppCompatActivity {
     FirebaseRecyclerAdapter<Animal, CategoryViewHolder> adapter;
     ArrayList<Animal> arrayList;
     RecyclerView recyclerView;
+    EditText search;
 
-    Button backButton;
     ImageView BackToCreate;
 
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
@@ -54,6 +58,7 @@ public class AnimalRUD extends AppCompatActivity {
 
         BackToCreate = findViewById(R.id.backToCreate);
 
+
         recyclerView = findViewById(R.id.recyclerview1);
         recyclerView.setHasFixedSize(true);
         arrayList = new ArrayList<>();
@@ -66,10 +71,6 @@ public class AnimalRUD extends AppCompatActivity {
             startActivity(intent2);
         });
 
-        /*
-        Remember to add search functionality
-         */
-        String cUser = currentUser.getUid();
 
         dref = FirebaseDatabase.getInstance().getReference().child("Animal");
         /**
@@ -142,4 +143,30 @@ public class AnimalRUD extends AppCompatActivity {
         });
         recyclerView.setAdapter(adapter);
     }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if(adapter!=null)
+            adapter.startListening();
+    }
+
+    @Override
+    protected void onStop() {
+        if(adapter!=null)
+            adapter.startListening();
+        super.onStop();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(adapter!=null)
+            adapter.startListening();
+    }
+
 }
+
+
+
+

@@ -197,6 +197,7 @@ public class FindActivity extends AppCompatActivity {
                 boolean org = Boolean.TRUE.equals(snapshot.getValue(boolean.class));
                 if (org) {
                     animalExplore.setVisibility(View.VISIBLE);
+
                 }
             }
             @Override
@@ -205,7 +206,7 @@ public class FindActivity extends AppCompatActivity {
         });
     }
     private void searching(String editable) {
-        Query query = dref.orderByChild("name")
+        Query query = dref.orderByChild("breed")
                 .startAt(editable).endAt(editable+"\uf8ff");
 
         Query query1 = dref.orderByChild("from")
