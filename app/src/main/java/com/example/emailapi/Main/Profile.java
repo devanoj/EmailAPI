@@ -78,6 +78,26 @@ public class Profile extends AppCompatActivity {
         deleteB.setOnClickListener(view -> {
             confirmDialog();
         });
+        updateSafetyHide();
+    }
+
+    private void updateSafetyHide() {
+        dr.child(userId).child("organisation").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Boolean org = snapshot.getValue(Boolean.class);
+                if (org) {
+                    updateSafety.setVisibility(View.INVISIBLE);
+                } else {
+                    updateSafety.setVisibility(View.VISIBLE);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
     private void updateFunction() {

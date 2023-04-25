@@ -97,6 +97,7 @@ public class AddSafetyInfo extends AppCompatActivity {
                 goToLogin();
 
 
+
         });
     }
 

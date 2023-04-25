@@ -91,7 +91,6 @@ public class Filtering extends AppCompatActivity {
             try {
                 // Set the API endpoint and API key
                 String link = "https://api.api-ninjas.com/v1/dogs?name=";
-                String nameOfBreed = "briard";
                 String endpoint = link + this.x;
                 String apiKey = "BI+Alyvlya8ICTKjNAny1w==zTNZj4XYZz6ESIVw";
 

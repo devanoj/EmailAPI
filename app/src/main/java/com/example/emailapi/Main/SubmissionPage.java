@@ -50,7 +50,7 @@ import java.util.concurrent.CompletableFuture;
 
 
 public class SubmissionPage extends AppCompatActivity {
-    TextView nameDog, display, displaytime, inputName1, inputAge1, inputBreed, inputEnergy, meeting1, displayDateEnd;
+    TextView nameDog, display, displaytime, inputName1, inputAge1, inputBreed, inputEnergy, meeting1, displayDateEnd, meetingEnd, To;
     Button dateButton, cMail, deleteAnimal, updateAnimal, mButtonChooseImage, backToHome, inputAnimal, EndTime;
 
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
@@ -88,6 +88,8 @@ public class SubmissionPage extends AppCompatActivity {
         inputEnergy = findViewById(R.id.energyLevel);
         meeting1 = findViewById(R.id.Meeting);
         displayDateEnd = findViewById(R.id.displayEndDate);
+        meetingEnd = findViewById(R.id.MeetingEnd);
+        To = findViewById(R.id.to);
 
         dateButton = findViewById(R.id.button);
         cMail = findViewById(R.id.mail);
@@ -253,6 +255,8 @@ public class SubmissionPage extends AppCompatActivity {
         cMail.setVisibility(View.INVISIBLE);
         meeting1.setVisibility(View.INVISIBLE);
         EndTime.setVisibility(View.INVISIBLE);
+        meetingEnd.setVisibility(View.INVISIBLE);
+        To.setVisibility(View.INVISIBLE);
     }
 
     private void goBackToHome() {
