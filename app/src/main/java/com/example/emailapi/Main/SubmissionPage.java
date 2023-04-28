@@ -215,11 +215,19 @@ public class SubmissionPage extends AppCompatActivity {
                 .setCancelable(false)
                 .setPositiveButton("Yes", (dialog, id) -> {
                     setUpDeleteButton();
-                    goBackToHome();
+                    //goBackToHome();
+                    goBAckToCreate();
                 })
                 .setNegativeButton("No", (dialog, id) -> dialog.cancel());
         AlertDialog alert = builder.create();
         alert.show();
+    }
+
+    private void goBAckToCreate() {
+        Bundle bundle2 = new Bundle();
+        Intent intent2 = new Intent(SubmissionPage.this, Create.class);
+        intent2.putExtras(bundle2);
+        startActivity(intent2);
     }
 
     private void displayDogName() {

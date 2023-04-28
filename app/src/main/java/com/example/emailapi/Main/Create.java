@@ -105,7 +105,7 @@ public class Create extends AppCompatActivity {
         });
 
         inputAnimal.setOnClickListener(view -> {
-            if (!inputAge1.getText().toString().matches("(0[1-9]|1[0-2])/(0[1-9]|[1-2][0-9]|3[01])/\\d{4}")) {
+            if (!inputAge1.getText().toString().matches("(0[1-9]|[1-2][0-9]|3[01])/(0[1-9]|1[0-2])/\\d{4}")) {
                 // If dateOfBirth1 is not null or empty, but it's not in the correct format, show an error message
                 Toast.makeText(getApplicationContext(), "Date format should be in number XX/XX/XXXX & be valid dates", Toast.LENGTH_SHORT).show();
                 return;
@@ -125,6 +125,7 @@ public class Create extends AppCompatActivity {
                                         email1, imageUrl, fromValue);
                                 AnimalDAO aDAO = new AnimalDAO(pet1);
                                 Toast.makeText(Create.this, "Entered Data", Toast.LENGTH_SHORT).show();
+                                resetCreate();
                             });
                         })
                         .addOnFailureListener(e -> Toast.makeText(Create.this, e.getMessage(), Toast.LENGTH_SHORT).show());
@@ -133,16 +134,16 @@ public class Create extends AppCompatActivity {
             }
 
         });
+
     }
 
-    /**
-    private String getFrom() {
+    private void resetCreate() {
+        Bundle bundle2 = new Bundle();
+        Intent intent2 = new Intent(Create.this, Create.class);
+        intent2.putExtras(bundle2);
+        startActivity(intent2);
+    }
 
-        if (currentUser != null) {
-            uid = currentUser.getUid();
-        }
-        return fromValue;
-    } **/
 
     private void setVisibilityForInfoBttn() {
         infoButton1.setOnClickListener(view -> {

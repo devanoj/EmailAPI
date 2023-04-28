@@ -66,6 +66,7 @@ public class ForgotPassword extends AppCompatActivity {
                             Toast.makeText(getApplicationContext(), "Failed to send password reset email", Toast.LENGTH_SHORT).show();
                         }
                     });
+            goBack();
 
         } else {
             Toast.makeText(getApplicationContext(), "Error Email doesn't exist", Toast.LENGTH_SHORT).show();

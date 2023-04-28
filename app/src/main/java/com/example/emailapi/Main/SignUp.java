@@ -84,7 +84,7 @@ public class SignUp extends AppCompatActivity {
             // If the user is not an organisation and dateOfBirth1 is null or empty, show an error message
             Toast.makeText(this, "Date of birth is required.", Toast.LENGTH_SHORT).show();
             return;
-        } else if (!dateOfBirth1.matches("(0[1-9]|1[0-2])/(0[1-9]|[1-2][0-9]|3[01])/\\d{4}")) {
+        } else if (!dateOfBirth1.matches("(0[1-9]|[1-2][0-9]|3[01])/(0[1-9]|1[0-2])/\\d{4}")) {
             // If dateOfBirth1 is not null or empty, but it's not in the correct format, show an error message
             Toast.makeText(getApplicationContext(), "Date format should be in number XX/XX/XXXX & be valid dates", Toast.LENGTH_SHORT).show();
             return;
