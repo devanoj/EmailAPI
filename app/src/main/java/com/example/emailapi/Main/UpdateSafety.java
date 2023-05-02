@@ -94,11 +94,13 @@ public class UpdateSafety extends AppCompatActivity {
         dr.orderByChild("ussid").equalTo(ussid).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                DataSnapshot sSnapshot = snapshot.getChildren().iterator().next();
+                if (snapshot.hasChildren()) {
+                    DataSnapshot sSnapshot = snapshot.getChildren().iterator().next();
 
-                String x = sSnapshot.child("safetyId").getValue(String.class);
-                Log.d("TAGXXX", "usid for current user: " + x);
-                updateSafetyNode(x);
+                    String x = sSnapshot.child("safetyId").getValue(String.class);
+                    Log.d("TAGXXX", "usid for current user: " + x);
+                    updateSafetyNode(x);
+                }
 
             }
             @Override

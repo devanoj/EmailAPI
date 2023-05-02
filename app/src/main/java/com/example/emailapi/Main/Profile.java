@@ -23,6 +23,8 @@ import com.example.emailapi.R;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -31,6 +33,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.HashMap;
+import java.util.Map;
 // Still need to change profile to not show Create Button
 
 public class Profile extends AppCompatActivity {
@@ -74,11 +79,11 @@ public class Profile extends AppCompatActivity {
         updateFunction();
 
 
-
+        updateSafetyHide();
         deleteB.setOnClickListener(view -> {
             confirmDialog();
         });
-        updateSafetyHide();
+
     }
 
     private void updateSafetyHide() {
@@ -86,10 +91,17 @@ public class Profile extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Boolean org = snapshot.getValue(Boolean.class);
-                if (org) {
-                    updateSafety.setVisibility(View.INVISIBLE);
-                } else {
-                    updateSafety.setVisibility(View.VISIBLE);
+//                if (org) {
+//                    updateSafety.setVisibility(View.INVISIBLE);
+//                } else {
+//                    updateSafety.setVisibility(View.VISIBLE);
+//                }
+                if (org != null) { // check if org is null or not
+                    if (org) {
+                        updateSafety.setVisibility(View.INVISIBLE);
+                    } else {
+                        updateSafety.setVisibility(View.VISIBLE);
+                    }
                 }
             }
 
@@ -132,11 +144,38 @@ public class Profile extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int id) {
                         deleteAnimal();
                         deleteUser();
+                        delteSafety();
                     }
                 })
                 .setNegativeButton("No", (dialog, id) -> dialog.cancel());
         AlertDialog alert = builder.create();
         alert.show();
+    }
+
+    private void delteSafety() {
+        DatabaseReference safetyRef = FirebaseDatabase.getInstance().getReference("Safety");
+        Query animalQuery = safetyRef.orderByChild("ussid").equalTo(userId);
+
+        animalQuery.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                for (DataSnapshot safetyS : snapshot.getChildren()) {
+                    String SafetyKey = safetyS.getKey();
+                    assert SafetyKey != null; // Might not be necessary
+                    safetyRef.child(SafetyKey).removeValue();
+                }
+                Toast.makeText(Profile.this, "Done Safety", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(Profile.this, "Failed to delete saftey", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+
     }
 
     private void deleteAnimal() {
@@ -219,7 +258,7 @@ public class Profile extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 boolean x = Boolean.TRUE.equals(snapshot.getValue(boolean.class));
                 updateUser(x);
-                submitUser();
+                submitUser(x);
             }
 
             @Override
@@ -229,11 +268,42 @@ public class Profile extends AppCompatActivity {
         });
     }
 
-    private void submitUser() {
+    private void submitUser(boolean x) {
         submit1.setOnClickListener(view -> {
-            User person1 = new User(inputName.getText().toString(), inputAge.getText().toString(), inputLS.getText().toString(), inputFT.getText().toString(), email1, userId, true,null);
-            UserDAO uDAO = new UserDAO(person1, userId);
-            Toast.makeText(Profile.this, "Updated Data", Toast.LENGTH_SHORT).show();
+//            User person1 = new User(inputName.getText().toString(), inputAge.getText().toString(), inputLS.getText().toString(), inputFT.getText().toString(), email1, userId, x,null);
+//            UserDAO uDAO = new UserDAO(person1, userId);
+//            Toast.makeText(Profile.this, "Updated Data", Toast.LENGTH_SHORT).show();
+
+            FirebaseDatabase database = FirebaseDatabase.getInstance();
+            DatabaseReference userRef = database.getReference("User").child(userId);
+
+            Map<String, Object> updates = new HashMap<>();
+            updates.put("name", inputName.getText().toString());
+            updates.put("dateOfBirth", inputAge.getText().toString());
+            updates.put("phoneNo", inputLS.getText().toString());
+            updates.put("eirCode", inputFT.getText().toString());
+            updates.put("email", email1);
+            updates.put("organisation", x);
+
+            userRef.updateChildren(updates)
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            Toast.makeText(Profile.this, "Updated data", Toast.LENGTH_SHORT).show();
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(Profile.this, "Failed to update data: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+
+
+            Bundle bundle1 = new Bundle();
+            Intent intent1 = new Intent(Profile.this, Profile.class);
+            intent1.putExtras(bundle1);
+            startActivity(intent1);
         });
     }
 
