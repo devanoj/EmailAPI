@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginBottom="720dp"
-        android:text="Update General Info on User"
+        android:text="Update General Info in Profile"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

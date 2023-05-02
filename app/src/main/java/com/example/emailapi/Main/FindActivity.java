@@ -100,8 +100,8 @@ public class FindActivity extends AppCompatActivity {
             @Override
             protected void onBindViewHolder(@NonNull CategoryViewHolder holder, int position, @NonNull Animal model) {
                 holder.cat.setText(model.getDOB());
-                holder.dead.setText(model.getBreed());
-                holder.desc.setText(model.getEnergyLevel());
+                holder.dead.setText(model.getEnergyLevel());
+                holder.desc.setText(model.getBreed());
                 holder.stat.setText(model.getName());
                 holder.fromOrg.setText(model.getFrom());
                 holder.id.setText(model.getId());
