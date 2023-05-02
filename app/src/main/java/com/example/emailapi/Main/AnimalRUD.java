@@ -92,17 +92,12 @@ public class AnimalRUD extends AppCompatActivity {
                 holder.id.setText(model.getId());
                 holder.idfromUser.setText(model.getUsid());
 
-                // Get the reference to the image URL
-                DatabaseReference imageUrlRef = FirebaseDatabase.getInstance().getReference().child("Animal").child(model.getId()).child("mImageUrl");
 
-                // Add a value event listener to get the image URL
+                DatabaseReference imageUrlRef = FirebaseDatabase.getInstance().getReference().child("Animal").child(model.getId()).child("mImageUrl");
                 imageUrlRef.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        // Get the image URL value from the dataSnapshot
                         String imageUrl = dataSnapshot.getValue(String.class);
-
-                        // Set the image using Picasso library
                         Picasso.get()
                                 .load(imageUrl)
                                 .fit()
@@ -112,7 +107,7 @@ public class AnimalRUD extends AppCompatActivity {
 
                     @Override
                     public void onCancelled(@NonNull DatabaseError databaseError) {
-                        // Handle the error
+
                     }
                 });
             }
